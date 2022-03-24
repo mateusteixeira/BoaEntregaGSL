@@ -35,8 +35,8 @@ public class User implements Serializable {
     @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "ACTIVATED")
-    private boolean activated = false;
+    @Column(name = "ACTIVE")
+    private boolean active = false;
 
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "user")
     private UserProfile userProfile;
