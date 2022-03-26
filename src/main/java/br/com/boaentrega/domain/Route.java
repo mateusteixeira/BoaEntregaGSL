@@ -21,7 +21,7 @@ public class Route implements Serializable {
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private String id;
+    private Long id;
 
     @Column(name = "CODE")
     private Long code;

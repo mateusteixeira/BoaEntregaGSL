@@ -20,7 +20,7 @@ public class CustomerOccurrence implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "ID")
-    private String id;
+    private Long id;
 
     @Column(name = "CODE")
     private Long code;
