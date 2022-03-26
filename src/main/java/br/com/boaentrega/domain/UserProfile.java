@@ -3,16 +3,14 @@ package br.com.boaentrega.domain;
 import java.io.Serializable;
 
 import br.com.boaentrega.domain.enumeration.Profile;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
+@Builder
 @ToString
 @RequiredArgsConstructor
 @Table(name = "USER_PROFILE")

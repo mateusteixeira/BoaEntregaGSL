@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserToApproveRepository extends MongoRepository<UserToApprove, String> {
+
+    void deleteByIdUser(Long idUser);
 }

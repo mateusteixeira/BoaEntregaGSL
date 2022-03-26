@@ -1,6 +1,7 @@
 package br.com.boaentrega.service;
 
 import br.com.boaentrega.domain.User;
+import br.com.boaentrega.domain.UserProfile;
 import br.com.boaentrega.domain.dto.UserDTO;
 import br.com.boaentrega.exception.UserNotFoundException;
 import br.com.boaentrega.repository.UserRepository;
@@ -71,5 +72,11 @@ public class UserService {
 
     public void deleteAllUsers() {
         userRepository.deleteAll();
+    }
+
+    public void activeUser(User user, UserProfile userProfile) {
+        user.setUserProfile(userProfile);
+        user.setActive(true);
+        userRepository.save(user);
     }
 }

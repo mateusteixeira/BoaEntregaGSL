@@ -7,5 +7,5 @@ public enum Profile {
     EMPLOYEE,
     CUSTOMER,
     ADMINISTRATOR,
-    PROVIDER,
+    PROVIDER
 }
