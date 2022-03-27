@@ -59,10 +59,7 @@ public class UserService {
     public void updateUser(UserDTO userDTO, Long idUser) {
         log.info("Updating user: {}", userDTO.getLogin());
         User user = getUserOrThrowNotFoundException(idUser);
-        user.setLogin(userDTO.getLogin());
-        user.setEmail(userDTO.getEmail());
-        user.setFirstName(userDTO.getFirstName());
-        user.setLastName(userDTO.getLastName());
+        userTranslator.update(user, userDTO);
         userRepository.save(user);
     }
 

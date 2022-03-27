@@ -24,16 +24,20 @@ public class RouteService {
 
     private final RouteTranslator routeTranslator;
 
-    public RouteService(RouteValidator routeValidator, RouteRepository routeRepository, RouteTranslator routeTranslator) {
+    private final EstimateTimeDeliveryCalculatorService estimateTimeDeliveryCalculatorService;
+
+    public RouteService(RouteValidator routeValidator, RouteRepository routeRepository, RouteTranslator routeTranslator, EstimateTimeDeliveryCalculatorService estimateTimeDeliveryCalculatorService) {
         this.routeValidator = routeValidator;
         this.routeRepository = routeRepository;
         this.routeTranslator = routeTranslator;
+        this.estimateTimeDeliveryCalculatorService = estimateTimeDeliveryCalculatorService;
     }
 
     public RouteDTO createRoute(RouteDTO routeDTO) {
-        log.info("Creating route: {} {}", routeDTO.getCode(), routeDTO.getName());
+        log.info("Creating route: {} {} - {}", routeDTO.getCode(), routeDTO.getCityFrom(), routeDTO.getCityTo());
         Route route = routeTranslator.toEntity(routeDTO);
         routeValidator.validateRouteExists(route);
+        estimateTimeDeliveryCalculatorService.putInQueue(route);
         return routeTranslator.toDTO(routeRepository.save(route));
     }
 
@@ -54,9 +58,7 @@ public class RouteService {
     public void updateRoute(RouteDTO routeDTO, Long idRoute) {
         log.info("Updating route: {}", routeDTO.getCode());
         Route route = getRouteOrThrowNotFoundException(idRoute);
-        route.setCode(routeDTO.getCode());
-        route.setName(routeDTO.getName());
-        route.setEan(routeDTO.getEan());
+        routeTranslator.update(route, routeDTO);
         routeRepository.save(route);
     }
 

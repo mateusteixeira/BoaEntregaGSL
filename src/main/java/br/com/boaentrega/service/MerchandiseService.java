@@ -54,9 +54,7 @@ public class MerchandiseService {
     public void updateMerchandise(MerchandiseDTO merchandiseDTO, Long idMerchandise) {
         log.info("Updating merchandise: {}", merchandiseDTO.getCode());
         Merchandise merchandise = getMerchandiseOrThrowNotFoundException(idMerchandise);
-        merchandise.setCode(merchandiseDTO.getCode());
-        merchandise.setName(merchandiseDTO.getName());
-        merchandise.setEan(merchandiseDTO.getEan());
+        merchandiseTranslator.update(merchandise, merchandiseDTO);
         merchandiseRepository.save(merchandise);
     }
 
