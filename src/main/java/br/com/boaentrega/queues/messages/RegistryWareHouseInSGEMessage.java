@@ -1,4 +1,4 @@
-package br.com.boaentrega.domain.dto;
+package br.com.boaentrega.queues.messages;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,14 +7,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import java.io.Serializable;
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class WareHouseDTO implements Serializable {
+public class RegistryWareHouseInSGEMessage extends AsyncOperationMessage {
 
     @JsonProperty("code")
     private Long code;

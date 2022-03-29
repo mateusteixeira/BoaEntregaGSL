@@ -2,6 +2,7 @@ package br.com.boaentrega.service;
 
 import br.com.boaentrega.domain.Route;
 import br.com.boaentrega.queues.messages.AsyncOperationMessage;
+import br.com.boaentrega.queues.messages.EstimatedTimeCalculationMessage;
 import br.com.boaentrega.queues.senders.EstimatedTimeCalculationSender;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -19,18 +20,18 @@ public class EstimateTimeDeliveryCalculatorService {
     }
 
 
-    public void calculate(AsyncOperationMessage asyncOperationMessage) {
-        Long idRoute = asyncOperationMessage.getId();
+    public void calculate(EstimatedTimeCalculationMessage estimatedTimeCalculationMessage) {
+        Long idRoute = estimatedTimeCalculationMessage.getId();
         Route route = routeService.getRouteOrThrowNotFoundException(idRoute);
         //TODO fazer requestExecutor
     }
 
     public void putInQueue(Route route) {
-        AsyncOperationMessage asyncOperationMessage = AsyncOperationMessage.builder()
+        EstimatedTimeCalculationMessage estimatedTimeCalculationMessage = EstimatedTimeCalculationMessage.builder()
                 .id(route.getId())
                 .cityFrom(route.getCityFrom())
                 .cityTo(route.getCityTo())
                 .build();
-        estimatedTimeCalculationSender.sendMessage(asyncOperationMessage);
+        estimatedTimeCalculationSender.sendMessage(estimatedTimeCalculationMessage);
     }
 }

@@ -2,6 +2,7 @@ package br.com.boaentrega.queues.consumers;
 
 import br.com.boaentrega.queues.Queues;
 import br.com.boaentrega.queues.messages.AsyncOperationMessage;
+import br.com.boaentrega.queues.messages.EstimatedTimeCalculationMessage;
 import br.com.boaentrega.service.EstimateTimeDeliveryCalculatorService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -17,10 +18,10 @@ public class EstimatedTimeCalculationConsumer {
         this.estimateTimeDeliveryCalculatorService = estimateTimeDeliveryCalculatorService;
     }
 
-    @RabbitListener(queues = Queues.ESTIMATED_TIME_CALCULATION_QUEUE)
-    public void consume(AsyncOperationMessage asyncOperationMessage) {
-        log.info("Consuming message at {}. Message: {}", Queues.ESTIMATED_TIME_CALCULATION_QUEUE, asyncOperationMessage);
-        estimateTimeDeliveryCalculatorService.calculate(asyncOperationMessage);
+    @RabbitListener(queues = Queues.ESTIMATED_TIME_CALCULATION_IN_SGE_QUEUE)
+    public void consume(EstimatedTimeCalculationMessage estimatedTimeCalculationMessage) {
+        log.info("Consuming message at {}. Message: {}", Queues.ESTIMATED_TIME_CALCULATION_IN_SGE_QUEUE, estimatedTimeCalculationMessage);
+        estimateTimeDeliveryCalculatorService.calculate(estimatedTimeCalculationMessage);
     }
 
 }
