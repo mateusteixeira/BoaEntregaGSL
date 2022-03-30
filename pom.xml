@@ -24,6 +24,7 @@
     <modules>
         <module>BoaEntregaGSL-Enterprise</module>
         <module>BoaEntregaGSL-Support</module>
+        <module>BoaEntregaGSL-Data</module>
     </modules>
 
 </project>
