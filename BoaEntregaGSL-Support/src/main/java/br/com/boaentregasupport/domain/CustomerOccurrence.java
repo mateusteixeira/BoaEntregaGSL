@@ -1,6 +1,6 @@
-package br.com.boaentrega.domain;
+package br.com.boaentregasupport.domain;
 
-import br.com.boaentrega.domain.enumeration.OccurrenceStatus;
+import br.com.boaentregasupport.domain.enumeration.OccurrenceStatus;
 import lombok.*;
 
 import javax.persistence.*;

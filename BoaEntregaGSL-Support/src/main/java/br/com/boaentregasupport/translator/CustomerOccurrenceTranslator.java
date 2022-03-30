@@ -1,7 +1,7 @@
-package br.com.boaentrega.translator;
+package br.com.boaentregasupport.translator;
 
-import br.com.boaentrega.domain.CustomerOccurrence;
-import br.com.boaentrega.domain.dto.CustomerOccurrenceDTO;
+import br.com.boaentregasupport.domain.CustomerOccurrence;
+import br.com.boaentregasupport.domain.dto.CustomerOccurrenceDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 

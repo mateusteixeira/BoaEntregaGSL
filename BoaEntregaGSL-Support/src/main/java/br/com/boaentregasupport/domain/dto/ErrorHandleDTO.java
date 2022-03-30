@@ -1,4 +1,4 @@
-package br.com.boaentrega.domain.dto;
+package br.com.boaentregasupport.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

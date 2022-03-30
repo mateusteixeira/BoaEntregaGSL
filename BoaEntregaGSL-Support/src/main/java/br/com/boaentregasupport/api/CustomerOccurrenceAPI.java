@@ -1,7 +1,7 @@
-package br.com.boaentrega.api;
+package br.com.boaentregasupport.api;
 
-import br.com.boaentrega.domain.dto.CustomerOccurrenceDTO;
-import br.com.boaentrega.service.CustomerOccurrenceService;
+import br.com.boaentregasupport.domain.dto.CustomerOccurrenceDTO;
+import br.com.boaentregasupport.service.CustomerOccurrenceService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

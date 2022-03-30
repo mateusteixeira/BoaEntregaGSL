@@ -1,4 +1,4 @@
-package br.com.boaentrega.exception;
+package br.com.boaentregasupport.exception;
 
 public class CustomerOccurrenceNotFoundException extends RuntimeException {
 

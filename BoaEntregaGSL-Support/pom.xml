@@ -9,7 +9,6 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>br.com.boaentrega</groupId>
 	<artifactId>BoaEntregaGSL-Support</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<name>BoaEntregaGSL-Support</name>

@@ -1,11 +1,11 @@
-package br.com.boaentrega.service;
+package br.com.boaentregasupport.service;
 
-import br.com.boaentrega.domain.CustomerOccurrence;
-import br.com.boaentrega.domain.dto.CustomerOccurrenceDTO;
-import br.com.boaentrega.exception.CustomerOccurrenceNotFoundException;
-import br.com.boaentrega.repository.CustomerOccurrenceRepository;
-import br.com.boaentrega.translator.CustomerOccurrenceTranslator;
-import br.com.boaentrega.validator.CustomerOccurrenceValidator;
+import br.com.boaentregasupport.domain.CustomerOccurrence;
+import br.com.boaentregasupport.domain.dto.CustomerOccurrenceDTO;
+import br.com.boaentregasupport.exception.CustomerOccurrenceNotFoundException;
+import br.com.boaentregasupport.repository.CustomerOccurrenceRepository;
+import br.com.boaentregasupport.translator.CustomerOccurrenceTranslator;
+import br.com.boaentregasupport.validator.CustomerOccurrenceValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

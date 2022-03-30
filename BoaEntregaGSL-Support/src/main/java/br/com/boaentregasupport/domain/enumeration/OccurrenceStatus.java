@@ -1,4 +1,4 @@
-package br.com.boaentrega.domain.enumeration;
+package br.com.boaentregasupport.domain.enumeration;
 
 public enum OccurrenceStatus {
 

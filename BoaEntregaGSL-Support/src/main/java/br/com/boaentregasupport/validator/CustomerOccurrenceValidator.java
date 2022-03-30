@@ -1,8 +1,8 @@
-package br.com.boaentrega.validator;
+package br.com.boaentregasupport.validator;
 
-import br.com.boaentrega.domain.CustomerOccurrence;
-import br.com.boaentrega.exception.CustomerOccurrenceAlreadyExistsException;
-import br.com.boaentrega.repository.CustomerOccurrenceRepository;
+import br.com.boaentregasupport.domain.CustomerOccurrence;
+import br.com.boaentregasupport.exception.CustomerOccurrenceAlreadyExistsException;
+import br.com.boaentregasupport.repository.CustomerOccurrenceRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;

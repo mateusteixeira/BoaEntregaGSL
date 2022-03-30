@@ -1,4 +1,4 @@
-package br.com.boaentrega.exception;
+package br.com.boaentregasupport.exception;
 
 public class CustomerOccurrenceAlreadyExistsException extends RuntimeException {
 

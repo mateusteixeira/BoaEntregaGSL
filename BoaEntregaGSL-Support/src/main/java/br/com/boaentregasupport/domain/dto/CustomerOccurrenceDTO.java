@@ -1,16 +1,12 @@
-package br.com.boaentrega.domain.dto;
+package br.com.boaentregasupport.domain.dto;
 
 
-import br.com.boaentrega.domain.enumeration.OccurrenceStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import java.io.Serializable;
 
 @Data
