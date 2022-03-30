@@ -1,11 +1,10 @@
 package br.com.boaentrega.domain;
 
+import br.com.boaentrega.domain.enumeration.OccurrenceStatus;
 import lombok.*;
-import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Getter
 @Setter
@@ -26,8 +25,15 @@ public class CustomerOccurrence implements Serializable {
     @Column(name = "CODE")
     private Long code;
 
-    @Column(name = "COMMENT")
-    private String comment;
+    @Column(name = "USER_COMMENT")
+    private String userComment;
+
+    @Column(name = "SUPPORT_COMMENT")
+    private String supportComment;
+
+    @Column(name = "STATUS")
+    @Enumerated(EnumType.STRING)
+    private OccurrenceStatus occurrenceStatus;
 
 }
 

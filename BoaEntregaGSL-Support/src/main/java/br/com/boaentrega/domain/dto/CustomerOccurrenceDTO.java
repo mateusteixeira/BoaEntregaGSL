@@ -1,6 +1,7 @@
 package br.com.boaentrega.domain.dto;
 
 
+import br.com.boaentrega.domain.enumeration.OccurrenceStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,25 +9,27 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.io.Serializable;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class WareHouseDTO implements Serializable {
+public class CustomerOccurrenceDTO implements Serializable {
 
     @JsonProperty("id")
     private Long id;
     @JsonProperty("code")
     private Long code;
 
-    @JsonProperty("name")
-    private String name;
+    @JsonProperty("userComment")
+    private String userComment;
 
-    @JsonProperty("capacity")
-    private Long capacity;
+    @JsonProperty("supportComment")
+    private String supportComment;
 
-    @JsonProperty("location")
-    private String location;
+    @JsonProperty("status")
+    private String occurrenceStatus;
 }

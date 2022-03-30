@@ -15,14 +15,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class BoaEntregaGSLExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {UserNotFoundException.class, MerchandiseNotFoundException.class, RouteNotFoundException.class, WareHouseNotFoundException.class})
+    @ExceptionHandler(value = {CustomerOccurrenceNotFoundException.class})
     protected ResponseEntity<ErrorHandleDTO> handleNotFound(RuntimeException ex, WebRequest request) {
         log.error("Handling notFound. Error: {}", ex.getMessage());
         return this.handleExceptionInternal(ex, ErrorHandleDTO.builder().message(String.format("Resource Not Found: %s", ex.getMessage())).build(),
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 
-    @ExceptionHandler(value = {UserAlreadyExistsException.class, MerchandiseAlreadyExistsException.class, RouteAlreadyExistsException.class, WareHouseAlreadyExistsException.class})
+    @ExceptionHandler(value = {CustomerOccurrenceAlreadyExistsException.class})
     protected ResponseEntity<ErrorHandleDTO> handleConflict(RuntimeException ex, WebRequest request) {
         log.error("Handling conflict. Error: {}", ex.getMessage());
         return this.handleExceptionInternal(ex, ErrorHandleDTO.builder().message(String.format("Resource Already Exists: %s", ex.getMessage())).build(),
