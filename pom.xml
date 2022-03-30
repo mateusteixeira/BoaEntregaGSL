@@ -25,6 +25,7 @@
         <module>BoaEntregaGSL-Enterprise</module>
         <module>BoaEntregaGSL-Support</module>
         <module>BoaEntregaGSL-Data</module>
+        <module>BoaEntregaGSL-Mock</module>
     </modules>
 
 </project>
