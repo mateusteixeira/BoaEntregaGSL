@@ -9,6 +9,7 @@ import br.com.boaentrega.domain.enumeration.Profile;
 import br.com.boaentrega.repository.UserProfileRepository;
 import br.com.boaentrega.repository.UserToApproveRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class UserProfileService {
 
     public final UserToApproveRepository userToApproveRepository;
 
-    public UserProfileService(UserService userService, UserProfileRepository userProfileRepository, UserToApproveRepository userToApproveRepository) {
+    public UserProfileService(@Lazy UserService userService, UserProfileRepository userProfileRepository, UserToApproveRepository userToApproveRepository) {
         this.userService = userService;
         this.userProfileRepository = userProfileRepository;
         this.userToApproveRepository = userToApproveRepository;

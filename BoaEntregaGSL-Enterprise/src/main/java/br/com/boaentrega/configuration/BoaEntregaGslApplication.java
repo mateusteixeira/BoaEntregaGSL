@@ -11,12 +11,13 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableAutoConfiguration
 @EntityScan(basePackages = "br.com.boaentrega.domain")
-@EnableJpaRepositories(basePackages = "br.com.boaentrega.domain")
-@EnableMongoRepositories(basePackages = "br.com.boaentrega.domain.document")
+@EnableJpaRepositories(basePackages = "br.com.boaentrega.repository")
+@EnableMongoRepositories(basePackages = "br.com.boaentrega.Repository")
 @PropertySource("classpath:application.properties")
 @ComponentScan("br.com.boaentrega")
 public class BoaEntregaGslApplication {
@@ -33,5 +34,10 @@ public class BoaEntregaGslApplication {
 	@Bean
 	public Queue registryQueue() {
 		return new Queue(Queues.REGISTRY_WARE_HOUSE_IN_SGE_QUEUE, false);
+	}
+
+	@Bean
+	public RestTemplate restTemplate() {
+		return new RestTemplate();
 	}
 }
