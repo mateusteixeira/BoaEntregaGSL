@@ -69,4 +69,8 @@ public class RouteService {
     public void deleteAllRoutes() {
         routeRepository.deleteAll();
     }
+
+    public void saveRoute(Route route) {
+        routeRepository.save(route);
+    }
 }

@@ -2,6 +2,7 @@ package br.com.boaentrega.api;
 
 
 import br.com.boaentrega.domain.dto.IntegrationDataDTO;
+import br.com.boaentrega.domain.dto.IntegrationDatasDTO;
 import br.com.boaentrega.service.IntegrationDataService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,8 @@ public class ThirdPartyAPI {
 
     @GetMapping("/getDataForBI")
     public ResponseEntity<List<IntegrationDataDTO>> getDataForBI() {
-        return ResponseEntity.ok(integrationDataService.getDataForBI());
+        IntegrationDatasDTO dataForBI = integrationDataService.getDataForBI();
+        return ResponseEntity.ok(dataForBI.getIntegrationDataDTOS());
     }
 
 }

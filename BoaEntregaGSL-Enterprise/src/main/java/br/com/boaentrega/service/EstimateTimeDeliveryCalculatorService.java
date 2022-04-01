@@ -1,21 +1,32 @@
 package br.com.boaentrega.service;
 
+import br.com.boaentrega.BoaEntregaGSLUrls;
 import br.com.boaentrega.domain.Route;
-import br.com.boaentrega.queues.messages.AsyncOperationMessage;
+import br.com.boaentrega.domain.dto.RouteDTO;
 import br.com.boaentrega.queues.messages.EstimatedTimeCalculationMessage;
 import br.com.boaentrega.queues.senders.EstimatedTimeCalculationSender;
+import br.com.boaentrega.translator.RouteTranslator;
+import com.google.common.collect.Maps;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 
 @Service
 public class EstimateTimeDeliveryCalculatorService {
 
     private final RouteService routeService;
 
+    private final RouteTranslator routeTranslator;
+
+    private final RequestExecutorService requestExecutorService;
+
     private final EstimatedTimeCalculationSender estimatedTimeCalculationSender;
 
-    public EstimateTimeDeliveryCalculatorService(@Lazy RouteService routeService, EstimatedTimeCalculationSender estimatedTimeCalculationSender) {
+    public EstimateTimeDeliveryCalculatorService(@Lazy RouteService routeService, RouteTranslator routeTranslator, RequestExecutorService requestExecutorService, EstimatedTimeCalculationSender estimatedTimeCalculationSender) {
         this.routeService = routeService;
+        this.routeTranslator = routeTranslator;
+        this.requestExecutorService = requestExecutorService;
         this.estimatedTimeCalculationSender = estimatedTimeCalculationSender;
     }
 
@@ -23,7 +34,9 @@ public class EstimateTimeDeliveryCalculatorService {
     public void calculate(EstimatedTimeCalculationMessage estimatedTimeCalculationMessage) {
         Long idRoute = estimatedTimeCalculationMessage.getId();
         Route route = routeService.getRouteOrThrowNotFoundException(idRoute);
-        //TODO fazer requestExecutor
+        RouteDTO routeDTO = routeTranslator.toDTO(route);
+        RouteDTO routeSavedInSGE = requestExecutorService.post(BoaEntregaGSLUrls.ROUTE_POST, routeDTO, Maps.newHashMap(), Maps.newHashMap(), RouteDTO.class).getBody();
+        routeService.saveRoute(routeTranslator.toEntity(routeSavedInSGE));
     }
 
     public void putInQueue(Route route) {
