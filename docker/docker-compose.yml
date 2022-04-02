@@ -1,96 +1,158 @@
 version: '3'
 services:
+  db:
+    container_name: pg_container
+    image: postgres
+    restart: always
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: boaEntrega
+    ports:
+      - "5432:5432"
+    networks:
+      - boa-entrega-network
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+    networks:
+      - boa-entrega-network
   mongo:
+    container_name: mongo-boa-entrega
     image: mongo:latest
     restart: unless-stopped
     ports:
       - "27017:27017"
     networks:
-      - digital-wallet-network
+      - boa-entrega-network
     command: [ "--bind_ip", "0.0.0.0" ]
   rabbitmq:
+    container_name: rabbitmq-boa-entrega
     image: rabbitmq:3-management
-    container_name: 'rabbitmq'
     ports:
       - "5672:5672"
       - "15672:15672"
     networks:
-      - digital-wallet-network
-  digital-wallet:
-    container_name: digital-wallet
+      - boa-entrega-network
+  boa-entrega-mock:
+    container_name: boa-entrega-mock
     build:
-      context: .
+      context: ../BoaEntregaGSL-Mock
       dockerfile: Dockerfile
-    image: digital-wallet:latest
+    image: boa-entrega-mock:latest
+    volumes:
+      - ./log:/log
     ports:
-      - "8888:8080"
+      - "7669:17669"
+    networks:
+      - boa-entrega-network
+  boa-entrega-data:
+    container_name: boa-entrega-data
+    build:
+      context: ../BoaEntregaGSL-Data
+      dockerfile: Dockerfile
+    image: boa-entrega-data:latest
+    ports:
+      - "7668:17668"
+    networks:
+      - boa-entrega-network
+  boa-entrega-support:
+    container_name: boa-entrega-support
+    build:
+      context: ../BoaEntregaGSL-Support
+      dockerfile: Dockerfile
+    image: boa-entrega-support:latest
+    ports:
+      - "7667:17667"
     depends_on:
+      - db
+    networks:
+      - boa-entrega-network
+  boa-entrega-enterprise:
+    container_name: boa-entrega-enterprise
+    build:
+      context: ../BoaEntregaGSL-Enterprise
+      dockerfile: Dockerfile
+    image: boa-entrega-enterprise:latest
+    ports:
+      - "7666:17666"
+    depends_on:
+      - db
       - mongo
       - rabbitmq
+      - boa-entrega-mock
     networks:
-      - digital-wallet-network
+      - boa-entrega-network
 networks:
-  digital-wallet-network:
+  boa-entrega-network:
     driver: bridge
-
-    ////
-    version: '3'
-    services:
-      nginx:
-        build:
-          dockerfile: ./docker/nginx.dockerfile
-          context: .
-        image: nginx
-        container_name: container-lb
-        ports:
-          - "80:80"
-        networks:
-          - minha-rede
-        depends_on:
-          - "app1"
-          - "app2"
-          - "app3"
-
-      sqlserver:
-        image: mcr.microsoft.com/mssql/server
-        container_name: container-sql
-        ports:
-          - "1433:1433"
-        environment:
-          SA_PASSWORD: "Docker12345"
-          ACCEPT_EULA: "Y"
-        networks:
-          - minha-rede
-
-      app1:
-        image: docker-example-app
-        container_name: container-app1
-        ports:
-          - "5000"
-        networks:
-          - minha-rede
-        depends_on:
-          - "sqlserver"
-
-      app2:
-        image: docker-example-app
-        container_name: container-app2
-        ports:
-          - "5000"
-        networks:
-          - minha-rede
-        depends_on:
-          - "sqlserver"
-
-      app3:
-        image: docker-example-app
-        container_name: container-app3
-        ports:
-          - "5000"
-        networks:
-          - minha-rede
-        depends_on:
-          - "sqlserver"
-    networks:
-      minha-rede:
-        driver: bridge
+#
+#    ////
+#    version: '3'
+#    services:
+#      nginx:
+#        build:
+#          dockerfile: ./docker/nginx.dockerfile
+#          context: .
+#        image: nginx
+#        container_name: container-lb
+#        ports:
+#          - "80:80"
+#        networks:
+#          - minha-rede
+#        depends_on:
+#          - "app1"
+#          - "app2"
+#          - "app3"
+#
+#      sqlserver:
+#        image: mcr.microsoft.com/mssql/server
+#        container_name: container-sql
+#        ports:
+#          - "1433:1433"
+#        environment:
+#          SA_PASSWORD: "Docker12345"
+#          ACCEPT_EULA: "Y"
+#        networks:
+#          - minha-rede
+#
+#      app1:
+#        image: docker-example-app
+#        container_name: container-app1
+#        ports:
+#          - "5000"
+#        networks:
+#          - minha-rede
+#        depends_on:
+#          - "sqlserver"
+#
+#      app2:
+#        image: docker-example-app
+#        container_name: container-app2
+#        ports:
+#          - "5000"
+#        networks:
+#          - minha-rede
+#        depends_on:
+#          - "sqlserver"
+#
+#      app3:
+#        image: docker-example-app
+#        container_name: container-app3
+#        ports:
+#          - "5000"
+#        networks:
+#          - minha-rede
+#        depends_on:
+#          - "sqlserver"
+#    networks:
+#      minha-rede:
+#        driver: bridge
