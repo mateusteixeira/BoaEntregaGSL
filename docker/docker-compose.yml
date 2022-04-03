@@ -48,8 +48,6 @@ services:
       context: ../BoaEntregaGSL-Mock
       dockerfile: Dockerfile
     image: mock-boa-entrega:latest
-    volumes:
-      - ./log:/log
     ports:
       - "7669:7669"
     networks:
@@ -101,7 +99,7 @@ services:
     - "80:80"
     networks:
       - boa-entrega-network
-    depends_on:
+    links:
       - "mock-app-boa-entrega"
       - "data-app-boa-entrega"
       - "support-app-boa-entrega"
