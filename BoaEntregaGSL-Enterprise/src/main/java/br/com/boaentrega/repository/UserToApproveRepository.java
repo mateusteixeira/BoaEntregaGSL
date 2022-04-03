@@ -1,6 +1,6 @@
 package br.com.boaentrega.repository;
 
-import br.com.boaentrega.domain.document.UserToApprove;
+import br.com.boaentrega.domain.UserToApprove;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

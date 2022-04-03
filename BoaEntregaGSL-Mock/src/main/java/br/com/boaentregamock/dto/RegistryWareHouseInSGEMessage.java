@@ -1,4 +1,4 @@
-package br.com.boaentregadata.dto;
+package br.com.boaentregamock.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

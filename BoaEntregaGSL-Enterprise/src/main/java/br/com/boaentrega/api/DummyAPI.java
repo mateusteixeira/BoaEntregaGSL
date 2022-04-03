@@ -16,6 +16,6 @@ public class DummyAPI {
 
     @GetMapping
     public String get() {
-        return "VAMO VELHO";
+        return "VAMO VELHO ENTERPRISE";
     }
 }

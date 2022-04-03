@@ -42,55 +42,70 @@ services:
       - "15672:15672"
     networks:
       - boa-entrega-network
-  boa-entrega-mock:
-    container_name: boa-entrega-mock
+  mock-app-boa-entrega:
+    container_name: mock-boa-entrega
     build:
       context: ../BoaEntregaGSL-Mock
       dockerfile: Dockerfile
-    image: boa-entrega-mock:latest
+    image: mock-boa-entrega:latest
     volumes:
       - ./log:/log
     ports:
-      - "7669:17669"
+      - "7669:7669"
     networks:
       - boa-entrega-network
-  boa-entrega-data:
-    container_name: boa-entrega-data
+  data-app-boa-entrega:
+    container_name: data-boa-entrega
     build:
       context: ../BoaEntregaGSL-Data
       dockerfile: Dockerfile
-    image: boa-entrega-data:latest
+    image: data-boa-entrega:latest
     ports:
-      - "7668:17668"
+      - "7668:7668"
     networks:
       - boa-entrega-network
-  boa-entrega-support:
-    container_name: boa-entrega-support
+  support-app-boa-entrega:
+    container_name: support-boa-entrega
     build:
       context: ../BoaEntregaGSL-Support
       dockerfile: Dockerfile
-    image: boa-entrega-support:latest
+    image: support-boa-entrega:latest
     ports:
-      - "7667:17667"
+      - "7667:7667"
     depends_on:
       - db
     networks:
       - boa-entrega-network
-  boa-entrega-enterprise:
-    container_name: boa-entrega-enterprise
+  enterprise-app-boa-entrega:
+    container_name: enterprise-boa-entrega
     build:
       context: ../BoaEntregaGSL-Enterprise
       dockerfile: Dockerfile
-    image: boa-entrega-enterprise:latest
+    image: enterprise-boa-entrega:latest
     ports:
-      - "7666:17666"
+      - "7666:7666"
     depends_on:
       - db
       - mongo
       - rabbitmq
-      - boa-entrega-mock
+      - mock-app-boa-entrega
     networks:
       - boa-entrega-network
+  nginx:
+    container_name: nginx-boa-entrega
+    build:
+      context: ../nginx
+      dockerfile: Dockerfile
+    image: nginx
+    ports:
+    - "80:80"
+    networks:
+      - boa-entrega-network
+    depends_on:
+      - "mock-app-boa-entrega"
+      - "data-app-boa-entrega"
+      - "support-app-boa-entrega"
+      - "enterprise-app-boa-entrega"
 networks:
   boa-entrega-network:
     driver: bridge

@@ -1,4 +1,4 @@
-package br.com.boaentrega.domain.document;
+package br.com.boaentrega.domain;
 
 import java.io.Serializable;
 

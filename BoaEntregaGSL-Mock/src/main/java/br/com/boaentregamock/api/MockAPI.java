@@ -1,9 +1,9 @@
-package br.com.boaentregadata.api;
+package br.com.boaentregamock.api;
 
-import br.com.boaentregadata.dto.IntegrationDataDTO;
-import br.com.boaentregadata.dto.IntegrationDatasDTO;
-import br.com.boaentregadata.dto.RegistryWareHouseInSGEMessage;
-import br.com.boaentregadata.dto.RouteDTO;
+import br.com.boaentregamock.dto.IntegrationDataDTO;
+import br.com.boaentregamock.dto.IntegrationDatasDTO;
+import br.com.boaentregamock.dto.RegistryWareHouseInSGEMessage;
+import br.com.boaentregamock.dto.RouteDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

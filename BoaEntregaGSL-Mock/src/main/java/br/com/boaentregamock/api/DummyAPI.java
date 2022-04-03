@@ -1,4 +1,4 @@
-package br.com.boaentregadata.api;
+package br.com.boaentregamock.api;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +10,6 @@ public class DummyAPI {
 
     @GetMapping
     public String get() {
-        return "VAMO VELHO";
+        return "VAMO VELHO MOCK";
     }
 }

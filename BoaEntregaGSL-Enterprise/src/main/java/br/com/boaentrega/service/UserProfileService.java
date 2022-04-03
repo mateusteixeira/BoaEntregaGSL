@@ -2,7 +2,7 @@ package br.com.boaentrega.service;
 
 import br.com.boaentrega.domain.User;
 import br.com.boaentrega.domain.UserProfile;
-import br.com.boaentrega.domain.document.UserToApprove;
+import br.com.boaentrega.domain.UserToApprove;
 import br.com.boaentrega.domain.dto.ApproveUserDTO;
 import br.com.boaentrega.domain.dto.UserDTO;
 import br.com.boaentrega.domain.enumeration.Profile;

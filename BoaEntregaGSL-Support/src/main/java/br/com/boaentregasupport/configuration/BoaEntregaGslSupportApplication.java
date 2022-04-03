@@ -10,14 +10,14 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableAutoConfiguration
-@EntityScan(basePackages = "br.com.boaentrega.domain")
-@EnableJpaRepositories(basePackages = "br.com.boaentrega.domain")
+@EntityScan(basePackages = "br.com.boaentregasupport.domain")
+@EnableJpaRepositories(basePackages = "br.com.boaentregasupport.repository")
 @PropertySource("classpath:application.properties")
-@ComponentScan("br.com.boaentrega")
-public class BoaEntregaGslApplication {
+@ComponentScan("br.com.boaentregasupport")
+public class BoaEntregaGslSupportApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BoaEntregaGslApplication.class, args);
+		SpringApplication.run(BoaEntregaGslSupportApplication.class, args);
 	}
 
 }

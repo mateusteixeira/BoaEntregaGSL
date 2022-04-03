@@ -17,13 +17,13 @@ import org.springframework.web.client.RestTemplate;
 @EnableAutoConfiguration
 @EntityScan(basePackages = "br.com.boaentrega.domain")
 @EnableJpaRepositories(basePackages = "br.com.boaentrega.repository")
-@EnableMongoRepositories(basePackages = "br.com.boaentrega.Repository")
+@EnableMongoRepositories(basePackages = "br.com.boaentrega.repository")
 @PropertySource("classpath:application.properties")
 @ComponentScan("br.com.boaentrega")
-public class BoaEntregaGslApplication {
+public class BoaEntregaGslEnterpriseApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BoaEntregaGslApplication.class, args);
+		SpringApplication.run(BoaEntregaGslEnterpriseApplication.class, args);
 	}
 
 	@Bean
