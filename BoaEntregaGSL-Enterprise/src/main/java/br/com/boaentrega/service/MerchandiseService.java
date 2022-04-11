@@ -1,5 +1,6 @@
 package br.com.boaentrega.service;
 
+import br.com.boaentrega.BoaEntregaGSLUrls;
 import br.com.boaentrega.domain.Merchandise;
 import br.com.boaentrega.domain.dto.MerchandiseDTO;
 import br.com.boaentrega.exception.MerchandiseNotFoundException;
@@ -10,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -24,10 +26,13 @@ public class MerchandiseService {
 
     private final MerchandiseTranslator merchandiseTranslator;
 
-    public MerchandiseService(MerchandiseValidator merchandiseValidator, MerchandiseRepository merchandiseRepository, MerchandiseTranslator merchandiseTranslator) {
+    private final RequestExecutorService requestExecutorService;
+
+    public MerchandiseService(MerchandiseValidator merchandiseValidator, MerchandiseRepository merchandiseRepository, MerchandiseTranslator merchandiseTranslator, RequestExecutorService requestExecutorService) {
         this.merchandiseValidator = merchandiseValidator;
         this.merchandiseRepository = merchandiseRepository;
         this.merchandiseTranslator = merchandiseTranslator;
+        this.requestExecutorService = requestExecutorService;
     }
 
     public MerchandiseDTO createMerchandise(MerchandiseDTO merchandiseDTO) {
@@ -64,5 +69,13 @@ public class MerchandiseService {
 
     public void deleteAllMerchandises() {
         merchandiseRepository.deleteAll();
+    }
+
+    public MerchandiseDTO getMerchandiseDeliveryStatus(Long idMerchandise) {
+        Merchandise merchandise = this.getMerchandiseOrThrowNotFoundException(idMerchandise);
+        String deliveryStatus = requestExecutorService.get(BoaEntregaGSLUrls.DELIVERY_STATUS, new HashMap<>(), new HashMap<>(), String.class).getBody();
+        MerchandiseDTO merchandiseDTO = merchandiseTranslator.toDTO(merchandise);
+        merchandiseDTO.setDeliverStatus(deliveryStatus);
+        return merchandiseDTO;
     }
 }

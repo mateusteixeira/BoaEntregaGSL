@@ -8,6 +8,7 @@ import br.com.boaentrega.domain.dto.UserDTO;
 import br.com.boaentrega.domain.enumeration.Profile;
 import br.com.boaentrega.repository.UserProfileRepository;
 import br.com.boaentrega.repository.UserToApproveRepository;
+import br.com.boaentrega.validator.UserProfileValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -19,14 +20,17 @@ import java.util.stream.Collectors;
 @Service
 public class UserProfileService {
 
-    public final UserService userService;
+    private final UserService userService;
 
-    public final UserProfileRepository userProfileRepository;
+    private final UserProfileValidator userProfileValidator;
 
-    public final UserToApproveRepository userToApproveRepository;
+    private final UserProfileRepository userProfileRepository;
 
-    public UserProfileService(@Lazy UserService userService, UserProfileRepository userProfileRepository, UserToApproveRepository userToApproveRepository) {
+    private final UserToApproveRepository userToApproveRepository;
+
+    public UserProfileService(@Lazy UserService userService, UserProfileValidator userProfileValidator, UserProfileRepository userProfileRepository, UserToApproveRepository userToApproveRepository) {
         this.userService = userService;
+        this.userProfileValidator = userProfileValidator;
         this.userProfileRepository = userProfileRepository;
         this.userToApproveRepository = userToApproveRepository;
     }
@@ -36,8 +40,8 @@ public class UserProfileService {
         userToApproveRepository.save(userToApprove);
     }
 
-    public void approveUser(ApproveUserDTO approveUserDTO) {
-        //TODO ver como vai pegar o user logado e validar
+    public void approveUser(ApproveUserDTO approveUserDTO, Long idApprovalUser) {
+        userProfileValidator.validateUserIsAuthorized(idApprovalUser);
         User user = userService.getUserOrThrowNotFoundException(approveUserDTO.getIdUser());
 
         UserProfile userProfile = UserProfile.builder()
@@ -49,7 +53,8 @@ public class UserProfileService {
         userToApproveRepository.deleteByIdUser(user.getId());
     }
 
-    public List<UserDTO> getAllUsersToApprove() {
+    public List<UserDTO> getAllUsersToApprove(Long idApprovalUser) {
+        userProfileValidator.validateUserIsAuthorized(idApprovalUser);
         return userToApproveRepository
                 .findAll()
                 .stream()

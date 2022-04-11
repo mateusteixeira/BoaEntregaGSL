@@ -9,6 +9,7 @@ public class BoaEntregaGSLUrls {
     public static final String ROUTE_POST = "/route";
     public static final String WARE_HOUSE_POST = "/warehouse";
     public static final String INTEGRATION = "/integration";
+    public static final String DELIVERY_STATUS = "/delivery-status";
 
     private final Environment environment;
 

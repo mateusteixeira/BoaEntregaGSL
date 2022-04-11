@@ -29,12 +29,12 @@ public class BoaEntregaGSLExceptionHandler extends ResponseEntityExceptionHandle
                 new HttpHeaders(), HttpStatus.CONFLICT, request);
     }
 
-//    @ExceptionHandler(value = {AmountBusinessException.class, WrongTransferTypeException.class})
-//    protected ResponseEntity<ErrorHandleDTO> handleBusinessError(RuntimeException ex, WebRequest request) {
-//        log.error("Handling businessError. Error: {}", ex.getMessage());
-//        return this.handleExceptionInternal(ex, ErrorHandleDTO.builder().message(String.format("Error in operation: %s", ex.getMessage())).build(),
-//                new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
-//    }
+    @ExceptionHandler(value = {UnauthorizedOperationException.class})
+    protected ResponseEntity<ErrorHandleDTO> handleBusinessError(RuntimeException ex, WebRequest request) {
+        log.error("Handling businessError. Error: {}", ex.getMessage());
+        return this.handleExceptionInternal(ex, ErrorHandleDTO.builder().message(String.format("Error in operation: %s", ex.getMessage())).build(),
+                new HttpHeaders(), HttpStatus.UNAUTHORIZED, request);
+    }
 
     @ExceptionHandler(value = {RuntimeException.class, RequestExecutorException.class})
     protected ResponseEntity<ErrorHandleDTO> handleErrors(RuntimeException ex, WebRequest request) {

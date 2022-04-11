@@ -34,4 +34,9 @@ public class MockAPI {
         IntegrationDatasDTO integrationDatasDTO = IntegrationDatasDTO.builder().integrationDataDTOS(Arrays.asList(integrationDataDTO, integrationDataDTO2)).build();
         return ResponseEntity.ok(integrationDatasDTO);
     }
+
+    @GetMapping("/delivery-status")
+    public ResponseEntity<String> getDeliveryStatus() {
+        return ResponseEntity.ok("EM TRÂNSITO");
+    }
 }
