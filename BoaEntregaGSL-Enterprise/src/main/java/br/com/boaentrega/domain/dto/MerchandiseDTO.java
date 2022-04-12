@@ -18,18 +18,19 @@ public class MerchandiseDTO {
     private Long id;
 
     @JsonProperty("code")
-    @ApiModelProperty(value = "Código da Mercadoria")
+    @ApiModelProperty(value = "Código da Mercadoria", required = true)
     private Long code;
 
     @JsonProperty("name")
-    @ApiModelProperty(value = "Nome da Mercadoria")
+    @ApiModelProperty(value = "Nome da Mercadoria", required = true)
     private String name;
 
     @JsonProperty("ean")
-    @ApiModelProperty(value = "EAN da Mercadoria")
+    @ApiModelProperty(value = "EAN da Mercadoria", required = true)
     private String ean;
 
     @JsonProperty("delivery_status")
+    @ApiModelProperty(value = "Status de Entrega")
     private String deliverStatus;
 
 }

@@ -18,7 +18,8 @@ public class WareHouse implements Serializable {
 
     @Id
     @Column(name = "ID")
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @SequenceGenerator(name="WARE_HOUSE_SEQ_GEN",sequenceName="WARE_HOUSE_SEQ", initialValue=0, allocationSize=1)
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="WARE_HOUSE_SEQ_GEN")
     private Long id;
 
     @Column(name = "CODE")
