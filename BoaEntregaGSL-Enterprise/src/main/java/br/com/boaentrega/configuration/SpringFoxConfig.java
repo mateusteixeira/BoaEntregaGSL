@@ -42,7 +42,7 @@ public class SpringFoxConfig {
                 .apiInfo(apiInfo())
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("br.com.boaentrega.api"))
-                .paths(PathSelectors.ant("/enterprise/*"))
+                .paths(PathSelectors.any())
                 .build()
                 .globalResponseMessage(RequestMethod.GET, responseMessageFor())
                 .globalResponseMessage(RequestMethod.POST, responseMessageFor())
