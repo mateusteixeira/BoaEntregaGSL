@@ -9,7 +9,9 @@ import org.mapstruct.MappingTarget;
 public interface CustomerOccurrenceTranslator {
 
     CustomerOccurrenceDTO toDTO(CustomerOccurrence customerOccurrence);
+
     CustomerOccurrence toEntity(CustomerOccurrenceDTO customerOccurrenceDTO);
+
     void update(@MappingTarget CustomerOccurrence customerOccurrence, CustomerOccurrenceDTO customerOccurrenceDTO);
 
 }

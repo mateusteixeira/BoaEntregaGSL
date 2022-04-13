@@ -30,7 +30,7 @@ public class ThirdPartyAPI {
     }
 
     @ApiOperation(value = "Retorna dados de integração com o BI")
-    @GetMapping(value = "/getDataForBI", produces="application/json")
+    @GetMapping(value = "/getDataForBI", produces = "application/json")
     public ResponseEntity<List<IntegrationDataDTO>> getDataForBI() {
         IntegrationDatasDTO dataForBI = integrationDataService.getDataForBI();
         return ResponseEntity.ok(dataForBI.getIntegrationDataDTOS());

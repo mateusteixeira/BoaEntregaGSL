@@ -12,8 +12,8 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource("classpath:application.properties")
 public class BoaEntregaGslApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BoaEntregaGslApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BoaEntregaGslApplication.class, args);
+    }
 
 }

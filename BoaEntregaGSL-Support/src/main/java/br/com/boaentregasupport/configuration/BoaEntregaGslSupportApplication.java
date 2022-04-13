@@ -16,8 +16,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan("br.com.boaentregasupport")
 public class BoaEntregaGslSupportApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BoaEntregaGslSupportApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BoaEntregaGslSupportApplication.class, args);
+    }
 
 }

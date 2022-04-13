@@ -1,13 +1,9 @@
 package br.com.boaentrega.service;
 
 import br.com.boaentrega.BoaEntregaGSLUrls;
-import br.com.boaentrega.domain.dto.IntegrationDataDTO;
 import br.com.boaentrega.domain.dto.IntegrationDatasDTO;
 import com.google.common.collect.Maps;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.List;
 
 @Service
 public class IntegrationDataService {

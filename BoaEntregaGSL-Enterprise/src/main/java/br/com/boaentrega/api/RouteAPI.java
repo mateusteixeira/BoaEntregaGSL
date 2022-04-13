@@ -29,7 +29,7 @@ public class RouteAPI {
     }
 
     @ApiOperation(value = "Cria uma Rota")
-    @PostMapping(produces="application/json", consumes="application/json")
+    @PostMapping(produces = "application/json", consumes = "application/json")
     public ResponseEntity<RouteDTO> createRoute(@RequestBody RouteDTO routeDTO) {
         RouteDTO savedRouteDTO = this.routeService.createRoute(routeDTO);
         URI location = getUriToHeader(savedRouteDTO);
@@ -37,33 +37,33 @@ public class RouteAPI {
     }
 
     @ApiOperation(value = "Retorna todas as Rotas")
-    @GetMapping(produces="application/json")
+    @GetMapping(produces = "application/json")
     public ResponseEntity<List<RouteDTO>> getRoutes(Pageable pageable) {
         return ResponseEntity.ok(routeService.getAllRoutes(pageable));
     }
 
     @ApiOperation(value = "Retorna uma Rota por Id.")
-    @GetMapping(value = "{id}", produces="application/json")
+    @GetMapping(value = "{id}", produces = "application/json")
     public ResponseEntity<RouteDTO> getRoute(@PathVariable(name = "id") Long idRoute) {
         return ResponseEntity.ok(routeService.getRouteById(idRoute));
     }
 
     @ApiOperation(value = "Atualiza uma Rota por Id.")
-    @PutMapping(value = "{id}", produces="application/text", consumes="application/json")
+    @PutMapping(value = "{id}", produces = "application/text", consumes = "application/json")
     public ResponseEntity<Object> updateRoute(@RequestBody RouteDTO routeDTO, @PathVariable(name = "id") Long idRoute) {
         routeService.updateRoute(routeDTO, idRoute);
         return ResponseEntity.noContent().build();
     }
 
     @ApiOperation(value = "Deleta uma Rora por Id.")
-    @DeleteMapping(value = "{id}", produces="application/text")
+    @DeleteMapping(value = "{id}", produces = "application/text")
     public ResponseEntity<Object> deleteRoute(@PathVariable(name = "id") Long idRoute) {
         routeService.deleteRoute(idRoute);
         return ResponseEntity.ok().build();
     }
 
     @ApiOperation(value = "Deleta todas as Rotas.")
-    @DeleteMapping(produces="application/text")
+    @DeleteMapping(produces = "application/text")
     public ResponseEntity<Object> deleteAllRoutes() {
         routeService.deleteAllRoutes();
         return ResponseEntity.ok().build();

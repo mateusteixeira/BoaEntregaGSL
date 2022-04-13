@@ -18,8 +18,8 @@ public class CustomerOccurrence implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @SequenceGenerator(name="CUSTOMER_OCCURRENCE_SEQ_GEN",sequenceName="CUSTOMER_OCCURRENCE_SEQ", initialValue=0, allocationSize=1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator="CUSTOMER_OCCURRENCE_SEQ_GEN")
+    @SequenceGenerator(name = "CUSTOMER_OCCURRENCE_SEQ_GEN", sequenceName = "CUSTOMER_OCCURRENCE_SEQ", initialValue = 0, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUSTOMER_OCCURRENCE_SEQ_GEN")
     @Column(name = "ID")
     private Long id;
 

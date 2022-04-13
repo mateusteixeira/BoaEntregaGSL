@@ -2,15 +2,16 @@ package br.com.boaentrega.service;
 
 import br.com.boaentrega.BoaEntregaGSLUrls;
 import br.com.boaentrega.exception.RequestExecutorException;
-import org.springframework.http.*;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriTemplate;
 
 import java.net.URI;
 import java.util.Map;
-
-import static java.lang.String.format;
 
 @Component
 public class RequestExecutorService {

@@ -9,7 +9,9 @@ import org.mapstruct.MappingTarget;
 public interface UserTranslator {
 
     UserDTO toDTO(User user);
+
     User toEntity(UserDTO userDTO);
+
     void update(@MappingTarget User user, UserDTO userDTO);
 
 }

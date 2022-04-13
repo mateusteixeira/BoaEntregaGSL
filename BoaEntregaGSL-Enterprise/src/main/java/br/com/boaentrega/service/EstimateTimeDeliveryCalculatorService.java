@@ -10,8 +10,6 @@ import com.google.common.collect.Maps;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-
 @Service
 public class EstimateTimeDeliveryCalculatorService {
 

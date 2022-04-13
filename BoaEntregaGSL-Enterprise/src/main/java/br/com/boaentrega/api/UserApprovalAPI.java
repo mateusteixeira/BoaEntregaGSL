@@ -11,10 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
-import static java.lang.String.format;
-import static java.util.Objects.*;
+import static java.util.Objects.isNull;
 
 @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Operação realizada com Sucesso!"),
@@ -32,7 +30,7 @@ public class UserApprovalAPI {
     }
 
     @ApiOperation(value = "Retorna todos os Usuários pendentes de aprovação")
-    @GetMapping(produces="application/json")
+    @GetMapping(produces = "application/json")
     public ResponseEntity<List<UserDTO>> getAllUsersToApprove(@RequestHeader("id-approval-user") Long idApprovalUser) {
         validateIdApprovalUserInformed(idApprovalUser);
         return ResponseEntity.ok(userProfileService.getAllUsersToApprove(idApprovalUser));
@@ -45,7 +43,7 @@ public class UserApprovalAPI {
     }
 
     @ApiOperation(value = "Aprova um Usuário por Id.")
-    @PutMapping(produces="application/json", consumes="application/json")
+    @PutMapping(produces = "application/json", consumes = "application/json")
     public ResponseEntity<Object> approvalUser(@RequestBody ApproveUserDTO approveUserDTO, @RequestHeader("id-approval-user") Long idApprovalUser) {
         validateIdApprovalUserInformed(idApprovalUser);
         userProfileService.approveUser(approveUserDTO, idApprovalUser);

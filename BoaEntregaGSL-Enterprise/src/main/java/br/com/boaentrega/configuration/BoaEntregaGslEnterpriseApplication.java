@@ -6,7 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -23,22 +22,22 @@ import org.springframework.web.client.RestTemplate;
 @ComponentScan("br.com.boaentrega")
 public class BoaEntregaGslEnterpriseApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BoaEntregaGslEnterpriseApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BoaEntregaGslEnterpriseApplication.class, args);
+    }
 
-	@Bean
-	public Queue calculationQueue() {
-		return new Queue(Queues.ESTIMATED_TIME_CALCULATION_IN_SGE_QUEUE, false);
-	}
+    @Bean
+    public Queue calculationQueue() {
+        return new Queue(Queues.ESTIMATED_TIME_CALCULATION_IN_SGE_QUEUE, false);
+    }
 
-	@Bean
-	public Queue registryQueue() {
-		return new Queue(Queues.REGISTRY_WARE_HOUSE_IN_SGE_QUEUE, false);
-	}
+    @Bean
+    public Queue registryQueue() {
+        return new Queue(Queues.REGISTRY_WARE_HOUSE_IN_SGE_QUEUE, false);
+    }
 
-	@Bean
-	public RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
 }

@@ -7,8 +7,6 @@ import br.com.boaentrega.queues.senders.RegistryWareHouseInSGESender;
 import com.google.common.collect.Maps;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-
 @Service
 public class RegistryWareHouseInSGEService {
 

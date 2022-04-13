@@ -96,7 +96,7 @@ services:
       dockerfile: Dockerfile
     image: nginx
     ports:
-    - "80:80"
+      - "80:80"
     networks:
       - boa-entrega-network
     links:

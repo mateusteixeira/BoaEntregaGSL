@@ -1,7 +1,6 @@
 package br.com.boaentrega.queues.consumers;
 
 import br.com.boaentrega.queues.Queues;
-import br.com.boaentrega.queues.messages.AsyncOperationMessage;
 import br.com.boaentrega.queues.messages.EstimatedTimeCalculationMessage;
 import br.com.boaentrega.service.EstimateTimeDeliveryCalculatorService;
 import lombok.extern.slf4j.Slf4j;

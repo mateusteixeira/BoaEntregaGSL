@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 
-import static java.lang.String.*;
+import static java.lang.String.format;
 
 @Component
 public class UserProfileValidator {

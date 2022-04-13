@@ -1,28 +1,16 @@
 package br.com.boaentrega.configuration;
 
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
-import com.mongodb.ServerAddress;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.core.env.Environment;
-import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoTemplate;
 
-import java.net.UnknownHostException;
-
-@Configuration(proxyBeanMethods=false)
-@ConditionalOnClass(value={com.mongodb.client.MongoClient.class,org.springframework.data.mongodb.core.MongoTemplate.class})
-@EnableConfigurationProperties(value= MongoProperties.class)
-@AutoConfigureAfter(value= MongoAutoConfiguration.class)
+@Configuration(proxyBeanMethods = false)
+@ConditionalOnClass(value = {com.mongodb.client.MongoClient.class, org.springframework.data.mongodb.core.MongoTemplate.class})
+@EnableConfigurationProperties(value = MongoProperties.class)
+@AutoConfigureAfter(value = MongoAutoConfiguration.class)
 public class MongoConfiguration {
 
 //    private static final Logger LOG = LoggerFactory.getLogger(MongoConfiguration.class);

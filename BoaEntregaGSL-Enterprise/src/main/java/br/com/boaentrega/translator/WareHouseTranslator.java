@@ -9,7 +9,9 @@ import org.mapstruct.MappingTarget;
 public interface WareHouseTranslator {
 
     WareHouseDTO toDTO(WareHouse wareHouse);
+
     WareHouse toEntity(WareHouseDTO wareHouseDTO);
+
     void update(@MappingTarget WareHouse wareHouse, WareHouseDTO wareHouseDTO);
 
 }
