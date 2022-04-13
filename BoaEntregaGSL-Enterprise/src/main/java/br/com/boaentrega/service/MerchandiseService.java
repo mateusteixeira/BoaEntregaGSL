@@ -71,11 +71,8 @@ public class MerchandiseService {
         merchandiseRepository.deleteAll();
     }
 
-    public MerchandiseDTO getMerchandiseDeliveryStatus(Long idMerchandise) {
-        Merchandise merchandise = this.getMerchandiseOrThrowNotFoundException(idMerchandise);
-        String deliveryStatus = requestExecutorService.get(BoaEntregaGSLUrls.DELIVERY_STATUS, new HashMap<>(), new HashMap<>(), String.class).getBody();
-        MerchandiseDTO merchandiseDTO = merchandiseTranslator.toDTO(merchandise);
-        merchandiseDTO.setDeliverStatus(deliveryStatus);
-        return merchandiseDTO;
+    public String getMerchandiseDeliveryStatus(Long idMerchandise) {
+        this.getMerchandiseOrThrowNotFoundException(idMerchandise);
+        return requestExecutorService.get(BoaEntregaGSLUrls.DELIVERY_STATUS, new HashMap<>(), new HashMap<>(), String.class).getBody();
     }
 }

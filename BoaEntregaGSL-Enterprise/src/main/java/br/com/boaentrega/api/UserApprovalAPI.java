@@ -17,7 +17,7 @@ import static java.lang.String.format;
 import static java.util.Objects.*;
 
 @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Mercadoria atualizada com Sucesso!"),
+        @ApiResponse(code = 200, message = "Operação realizada com Sucesso!"),
         @ApiResponse(code = 401, message = "Você não tem permissão para acessar este recurso."),
         @ApiResponse(code = 500, message = "Ocorreu um erro interno."),
 })
@@ -32,7 +32,7 @@ public class UserApprovalAPI {
     }
 
     @ApiOperation(value = "Retorna todos os Usuários pendentes de aprovação")
-    @GetMapping(produces="application/json", consumes="application/json")
+    @GetMapping(produces="application/json")
     public ResponseEntity<List<UserDTO>> getAllUsersToApprove(@RequestHeader("id-approval-user") Long idApprovalUser) {
         validateIdApprovalUserInformed(idApprovalUser);
         return ResponseEntity.ok(userProfileService.getAllUsersToApprove(idApprovalUser));

@@ -14,7 +14,7 @@ import java.net.URI;
 import java.util.List;
 
 @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Mercadorias deletada com Sucesso!"),
+        @ApiResponse(code = 200, message = "Operação realizada com Sucesso!"),
         @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
         @ApiResponse(code = 500, message = "Ocorreu um erro interno."),
 })
@@ -37,39 +37,39 @@ public class MerchandiseAPI {
     }
 
     @ApiOperation(value = "Retorna todas as Mercadorias")
-    @GetMapping(produces="application/json", consumes="application/json")
+    @GetMapping(produces="application/json")
     public ResponseEntity<List<MerchandiseDTO>> getMerchandises(Pageable pageable) {
         return ResponseEntity.ok(merchandiseService.getAllMerchandises(pageable));
     }
 
     @ApiOperation(value = "Retorna o status de entrega da mercadoria")
-    @GetMapping(value = "{id}/delivery-status", produces="application/json", consumes="application/json")
-    public ResponseEntity<MerchandiseDTO> getMerchandisesDeliveryStatus(@PathVariable(name = "id") Long idMerchandise) {
+    @GetMapping(value = "{id}/delivery-status", produces="application/text")
+    public ResponseEntity<String> getMerchandisesDeliveryStatus(@PathVariable(name = "id") Long idMerchandise) {
         return ResponseEntity.ok(merchandiseService.getMerchandiseDeliveryStatus(idMerchandise));
     }
 
     @ApiOperation(value = "Retorna uma Mercadoria por Id.")
-    @GetMapping(value = "{id}", produces="application/json", consumes="application/json")
+    @GetMapping(value = "{id}", produces="application/json")
     public ResponseEntity<MerchandiseDTO> getMerchandise(@PathVariable(name = "id") Long idMerchandise) {
         return ResponseEntity.ok(merchandiseService.getMerchandiseById(idMerchandise));
     }
 
     @ApiOperation(value = "Atualiza uma Mercadoria por Id.")
-    @PutMapping(value = "{id}", produces="application/json", consumes="application/json")
+    @PutMapping(value = "{id}", produces="application/text", consumes="application/json")
     public ResponseEntity<Object> updateMerchandise(@RequestBody MerchandiseDTO merchandiseDTO, @PathVariable(name = "id") Long idMerchandise) {
         merchandiseService.updateMerchandise(merchandiseDTO, idMerchandise);
         return ResponseEntity.noContent().build();
     }
 
     @ApiOperation(value = "Deleta uma Mercadoria por Id.")
-    @DeleteMapping(value = "{id}", produces="application/json", consumes="application/json")
+    @DeleteMapping(value = "{id}", produces="application/text")
     public ResponseEntity<Object> deleteMerchandise(@PathVariable(name = "id") Long idMerchandise) {
         merchandiseService.deleteMerchandise(idMerchandise);
         return ResponseEntity.ok().build();
     }
 
     @ApiOperation(value = "Deleta todas as Mercadorias.")
-    @DeleteMapping(produces="application/json", consumes="application/json")
+    @DeleteMapping(produces="application/text")
     public ResponseEntity<Object> deleteAllMerchandises() {
         merchandiseService.deleteAllMerchandises();
         return ResponseEntity.ok().build();

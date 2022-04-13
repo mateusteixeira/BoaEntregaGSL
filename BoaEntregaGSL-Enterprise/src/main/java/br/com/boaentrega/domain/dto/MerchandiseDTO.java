@@ -28,9 +28,4 @@ public class MerchandiseDTO {
     @JsonProperty("ean")
     @ApiModelProperty(value = "EAN da Mercadoria", required = true)
     private String ean;
-
-    @JsonProperty("delivery_status")
-    @ApiModelProperty(value = "Status de Entrega")
-    private String deliverStatus;
-
 }

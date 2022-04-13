@@ -15,7 +15,7 @@ import java.net.URI;
 import java.util.List;
 
 @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Usuários deletados com Sucesso!"),
+        @ApiResponse(code = 200, message = "Operação realizada com Sucesso!"),
         @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
         @ApiResponse(code = 500, message = "Ocorreu um erro interno."),
 })
@@ -38,33 +38,33 @@ public class UserAPI {
     }
 
     @ApiOperation(value = "Retorna todos os Usuários")
-    @GetMapping(produces="application/json", consumes="application/json")
+    @GetMapping(produces="application/json")
     public ResponseEntity<List<UserDTO>> getUsers(Pageable pageable) {
         return ResponseEntity.ok(userService.getAllUsers(pageable));
     }
 
     @ApiOperation(value = "Retorna um Usuário por Id.")
-    @GetMapping(value = "{id}", produces="application/json", consumes="application/json")
+    @GetMapping(value = "{id}", produces="application/json")
     public ResponseEntity<UserDTO> getUser(@PathVariable(name = "id") Long idUser) {
         return ResponseEntity.ok(userService.getUserById(idUser));
     }
 
     @ApiOperation(value = "Atualiza um Usuário por Id.")
-    @PutMapping(value = "{id}", produces="application/json", consumes="application/json")
+    @PutMapping(value = "{id}", produces="application/text", consumes="application/json")
     public ResponseEntity<Object> updateUser(@RequestBody UserDTO userDTO, @PathVariable(name = "id") Long idUser) {
         userService.updateUser(userDTO, idUser);
         return ResponseEntity.noContent().build();
     }
 
     @ApiOperation(value = "Deleta um Usuário por Id.")
-    @DeleteMapping(value = "{id}", produces="application/json", consumes="application/json")
+    @DeleteMapping(value = "{id}", produces="application/text")
     public ResponseEntity<Object> deleteUser(@PathVariable(name = "id") Long idUser) {
         userService.deleteUser(idUser);
         return ResponseEntity.ok().build();
     }
 
     @ApiOperation(value = "Deleta todos os Usuários.")
-    @DeleteMapping(produces="application/json", consumes="application/json")
+    @DeleteMapping(produces="application/text")
     public ResponseEntity<Object> deleteAllUsers() {
         userService.deleteAllUsers();
         return ResponseEntity.ok().build();
