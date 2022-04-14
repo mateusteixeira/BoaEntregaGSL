@@ -2,6 +2,7 @@ version: '3'
 
 volumes:
   prometheus_data: {}
+  grafana_data: {}
 
 services:
   db:
@@ -108,28 +109,11 @@ services:
       - "data-app-boa-entrega"
       - "support-app-boa-entrega"
       - "enterprise-app-boa-entrega"
-  node-exporter:
-    image: prom/node-exporter:latest
-    container_name: node-exporter
-    restart: unless-stopped
-    volumes:
-      - ../prometheus/proc:/host/proc:ro
-      - ../prometheus/sys:/host/sys:ro
-      - ../prometheus/:/rootfs:ro
-    command:
-      - '--path.procfs=/host/proc'
-      - '--path.rootfs=/rootfs'
-      - '--path.sysfs=/host/sys'
-      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
-    expose:
-      - 9100
-    depends_on:
-      - enterprise-app-boa-entrega
-    networks:
-      - boa-entrega-network
   prometheus:
     image: prom/prometheus:latest
     container_name: prometheus
+    ports:
+      - 9090:9090
     restart: unless-stopped
     volumes:
       - ../prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
@@ -140,12 +124,24 @@ services:
       - '--web.console.libraries=/etc/prometheus/console_libraries'
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--web.enable-lifecycle'
-    expose:
-      - 9090
-    depends_on:
-      - enterprise-app-boa-entrega
     networks:
       - boa-entrega-network
+    links:
+      - "enterprise-app-boa-entrega"
+      - "nginx"
+  grafana:
+    image: grafana/grafana:3.0.1
+    container_name: grafana
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=pass
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - boa-entrega-network
+    links:
+      - "prometheus"
 networks:
   boa-entrega-network:
     driver: bridge

@@ -60,4 +60,7 @@ build/
 hs_err_pid*
 
 .idea/
+./prometheus/proc/**
+./prometheus/prometheus_data/**
+./prometheus/sys
 
