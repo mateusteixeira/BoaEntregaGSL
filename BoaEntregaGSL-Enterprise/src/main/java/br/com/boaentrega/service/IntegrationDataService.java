@@ -2,8 +2,9 @@ package br.com.boaentrega.service;
 
 import br.com.boaentrega.BoaEntregaGSLUrls;
 import br.com.boaentrega.domain.dto.IntegrationDatasDTO;
-import com.google.common.collect.Maps;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 
 @Service
 public class IntegrationDataService {
@@ -15,6 +16,6 @@ public class IntegrationDataService {
     }
 
     public IntegrationDatasDTO getDataForBI() {
-        return requestExecutorService.get(BoaEntregaGSLUrls.INTEGRATION, Maps.newHashMap(), Maps.newHashMap(), IntegrationDatasDTO.class).getBody();
+        return requestExecutorService.get(BoaEntregaGSLUrls.INTEGRATION, new HashMap<>(), new HashMap<>(), IntegrationDatasDTO.class).getBody();
     }
 }

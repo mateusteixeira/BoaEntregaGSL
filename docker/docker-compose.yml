@@ -10,13 +10,27 @@ services:
     image: postgres
     restart: always
     volumes:
-      - ./database:/docker-entrypoint-initdb.d
+      - ./database/init-database.sql:/docker-entrypoint-initdb.d/init-database.sql
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: boaEntrega
     ports:
       - "5432:5432"
+    networks:
+      - boa-entrega-network
+  db-support:
+    container_name: pg_container_support
+    image: postgres
+    restart: always
+    volumes:
+      - ./database/init-database-support.sql:/docker-entrypoint-initdb.d/init-database-support.sql
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: boaEntregaSupport
+    ports:
+      - "5433:5433"
     networks:
       - boa-entrega-network
   pgadmin:
@@ -76,7 +90,7 @@ services:
     ports:
       - "7667:7667"
     depends_on:
-      - db
+      - db-support
     networks:
       - boa-entrega-network
   enterprise-app-boa-entrega:

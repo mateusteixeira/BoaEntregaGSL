@@ -6,9 +6,11 @@ import br.com.boaentrega.domain.dto.RouteDTO;
 import br.com.boaentrega.queues.messages.EstimatedTimeCalculationMessage;
 import br.com.boaentrega.queues.senders.EstimatedTimeCalculationSender;
 import br.com.boaentrega.translator.RouteTranslator;
-import com.google.common.collect.Maps;
+
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 
 @Service
 public class EstimateTimeDeliveryCalculatorService {
@@ -33,7 +35,7 @@ public class EstimateTimeDeliveryCalculatorService {
         Long idRoute = estimatedTimeCalculationMessage.getId();
         Route route = routeService.getRouteOrThrowNotFoundException(idRoute);
         RouteDTO routeDTO = routeTranslator.toDTO(route);
-        RouteDTO routeSavedInSGE = requestExecutorService.post(BoaEntregaGSLUrls.ROUTE_POST, routeDTO, Maps.newHashMap(), Maps.newHashMap(), RouteDTO.class).getBody();
+        RouteDTO routeSavedInSGE = requestExecutorService.post(BoaEntregaGSLUrls.ROUTE_POST, routeDTO, new HashMap<>(), new HashMap<>(), RouteDTO.class).getBody();
         routeService.saveRoute(routeTranslator.toEntity(routeSavedInSGE));
     }
 

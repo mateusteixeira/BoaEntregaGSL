@@ -1,6 +1,7 @@
 package br.com.boaentrega.configuration;
 
 import br.com.boaentrega.queues.Queues;
+import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.amqp.core.Queue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -40,4 +41,12 @@ public class BoaEntregaGslEnterpriseApplication {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
+
+//    @Bean
+//    public SpringLiquibase liquibase() {
+//        SpringLiquibase liquibase = new SpringLiquibase();
+//        liquibase.setChangeLog("classpath:liquibase-changeLog.xml");
+//        liquibase.setDataSource(dataSource());
+//        return liquibase;
+//    }
 }

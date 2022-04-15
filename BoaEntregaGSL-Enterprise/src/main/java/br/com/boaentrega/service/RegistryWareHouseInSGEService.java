@@ -4,8 +4,9 @@ import br.com.boaentrega.BoaEntregaGSLUrls;
 import br.com.boaentrega.domain.WareHouse;
 import br.com.boaentrega.queues.messages.RegistryWareHouseInSGEMessage;
 import br.com.boaentrega.queues.senders.RegistryWareHouseInSGESender;
-import com.google.common.collect.Maps;
 import org.springframework.stereotype.Service;
+
+import java.util.HashMap;
 
 @Service
 public class RegistryWareHouseInSGEService {
@@ -21,7 +22,7 @@ public class RegistryWareHouseInSGEService {
 
 
     public void sendToSGE(RegistryWareHouseInSGEMessage registryWareHouseInSGEMessage) {
-        requestExecutorService.post(BoaEntregaGSLUrls.WARE_HOUSE_POST, registryWareHouseInSGEMessage, Maps.newHashMap(), Maps.newHashMap(), Object.class);
+        requestExecutorService.post(BoaEntregaGSLUrls.WARE_HOUSE_POST, registryWareHouseInSGEMessage, new HashMap<>(), new HashMap<>(), Object.class);
     }
 
     public void putInQueue(WareHouse wareHouse) {
