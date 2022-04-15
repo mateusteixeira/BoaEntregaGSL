@@ -1,7 +1,6 @@
 package br.com.boaentrega.configuration;
 
 import br.com.boaentrega.queues.Queues;
-import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.amqp.core.Queue;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

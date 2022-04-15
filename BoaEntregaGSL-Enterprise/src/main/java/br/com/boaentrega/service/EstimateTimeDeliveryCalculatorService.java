@@ -6,7 +6,6 @@ import br.com.boaentrega.domain.dto.RouteDTO;
 import br.com.boaentrega.queues.messages.EstimatedTimeCalculationMessage;
 import br.com.boaentrega.queues.senders.EstimatedTimeCalculationSender;
 import br.com.boaentrega.translator.RouteTranslator;
-
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 

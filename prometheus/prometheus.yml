@@ -6,9 +6,9 @@ scrape_configs:
   - job_name: "prometheus"
     scrape_interval: 5s
     static_configs:
-      - targets: ["prometheus:9090"]
+      - targets: [ "prometheus:9090" ]
   - job_name: "enterprise-app-boa-entrega"
     scrape_interval: 5s
     metrics_path: '/enterprise/actuator/prometheus'
     static_configs:
-      - targets: ["enterprise-app-boa-entrega:7666"]
+      - targets: [ "enterprise-app-boa-entrega:7666" ]
