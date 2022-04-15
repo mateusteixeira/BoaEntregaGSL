@@ -2,16 +2,14 @@ package br.com.boaentrega.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MerchandiseDTO {
+@EqualsAndHashCode(callSuper = true)
+public class MerchandiseDTO extends AbstractDTO {
 
     @JsonProperty("id")
     @ApiModelProperty(value = "Identificador da Mercadoria")
@@ -28,4 +26,18 @@ public class MerchandiseDTO {
     @JsonProperty("ean")
     @ApiModelProperty(value = "EAN da Mercadoria", required = true)
     private String ean;
+
+    @JsonProperty("delivery_status")
+    @ApiModelProperty(value = "Status de Entrega")
+    private String deliverStatus;
+
+    @Override
+    public String getMainIdentifier() {
+        return String.valueOf(getCode());
+    }
+
+    @Override
+    public String getSecondaryIdentifier() {
+        return getName();
+    }
 }

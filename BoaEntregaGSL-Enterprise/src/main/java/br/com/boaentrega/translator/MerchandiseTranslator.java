@@ -1,17 +1,41 @@
 package br.com.boaentrega.translator;
 
+import br.com.boaentrega.domain.AbstractEntity;
 import br.com.boaentrega.domain.Merchandise;
+import br.com.boaentrega.domain.dto.AbstractDTO;
 import br.com.boaentrega.domain.dto.MerchandiseDTO;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
+import org.springframework.stereotype.Service;
 
-@Mapper
-public interface MerchandiseTranslator {
 
-    MerchandiseDTO toDTO(Merchandise merchandise);
+@Service
+public class MerchandiseTranslator extends AbstractTranslator<Merchandise, MerchandiseDTO> {
 
-    Merchandise toEntity(MerchandiseDTO merchandiseDTO);
 
-    void update(@MappingTarget Merchandise merchandise, MerchandiseDTO merchandiseDTO);
+    @Override
+    public MerchandiseDTO toDTO(Merchandise merchandise) {
+        return MerchandiseDTO.builder()
+                .code(merchandise.getCode())
+                .id(merchandise.getId())
+                .ean(merchandise.getEan())
+                .name(merchandise.getName())
+                .build();
+    }
 
+    @Override
+    public Merchandise toEntity(MerchandiseDTO merchandiseDTO) {
+        Merchandise merchandise = Merchandise.builder()
+                .code(merchandiseDTO.getCode())
+                .ean(merchandiseDTO.getEan())
+                .name(merchandiseDTO.getName())
+                .build();
+        merchandise.setId(merchandiseDTO.getId());
+        return merchandise;
+    }
+
+    @Override
+    public void update(Merchandise merchandise, MerchandiseDTO merchandiseDTO) {
+        merchandise.setCode(merchandiseDTO.getCode());
+        merchandise.setEan(merchandiseDTO.getEan());
+        merchandise.setName(merchandiseDTO.getName());
+    }
 }

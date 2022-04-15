@@ -8,11 +8,12 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
+@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "MERCHANDISE")
-public class Merchandise implements Serializable {
+public class Merchandise extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,5 +31,15 @@ public class Merchandise implements Serializable {
 
     @Column(name = "EAN")
     private String ean;
+
+    @Override
+    public String getMainIdentifier() {
+        return String.valueOf(this.getCode());
+    }
+
+    @Override
+    public String getSecondaryIdentifier() {
+        return this.getName();
+    }
 
 }
