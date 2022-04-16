@@ -5,12 +5,10 @@ import br.com.boaentrega.domain.dto.RouteDTO;
 import br.com.boaentrega.repository.IJpaRepository;
 import br.com.boaentrega.translator.AbstractTranslator;
 import br.com.boaentrega.validator.AbstractValidator;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-@Slf4j
 @Service
-public class RouteService extends AbstractService<Route, Long, RouteDTO>{
+public class RouteService extends AbstractService<Route, Long, RouteDTO> {
 
     private final EstimateTimeDeliveryCalculatorService estimateTimeDeliveryCalculatorService;
 
@@ -19,7 +17,8 @@ public class RouteService extends AbstractService<Route, Long, RouteDTO>{
         this.estimateTimeDeliveryCalculatorService = estimateTimeDeliveryCalculatorService;
     }
 
-    public RouteDTO createRoute(RouteDTO routeDTO) {
+    @Override
+    public RouteDTO createAbstract(RouteDTO routeDTO) {
         RouteDTO routeDTOSaved = super.createAbstract(routeDTO);
         estimateTimeDeliveryCalculatorService.putInQueue(routeDTOSaved);
         return routeDTOSaved;

@@ -1,25 +1,27 @@
 package br.com.boaentrega.api;
 
 import br.com.boaentrega.domain.Merchandise;
-import br.com.boaentrega.domain.dto.AbstractDTO;
 import br.com.boaentrega.domain.dto.MerchandiseDTO;
 import br.com.boaentrega.service.AbstractService;
 import br.com.boaentrega.service.MerchandiseService;
-import io.swagger.annotations.*;
+import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/merchandise")
 public class MerchandiseAPI extends AbstractAPI<Merchandise, Long, MerchandiseDTO> {
 
-    protected MerchandiseAPI(AbstractService<Merchandise, Long, MerchandiseDTO> abstractService) {
+    private final MerchandiseService merchandiseService;
+
+    protected MerchandiseAPI(AbstractService<Merchandise, Long, MerchandiseDTO> abstractService, MerchandiseService merchandiseService) {
         super(abstractService);
+        this.merchandiseService = merchandiseService;
     }
 
     @Override
@@ -50,5 +52,12 @@ public class MerchandiseAPI extends AbstractAPI<Merchandise, Long, MerchandiseDT
     @Override
     public ResponseEntity<Object> deleteAllAbstractEntities() {
         return super.deleteAllAbstractEntities();
+    }
+
+    @ApiOperation(value = "Retorna o status de entrega da mercadoria")
+    @GetMapping(value = "{id}/delivery-status", produces = "application/text")
+    public ResponseEntity<String> getMerchandisesDeliveryStatus(@PathVariable(name = "id") Long idMerchandise) {
+        log.info("Recebida request para retorno de status de mercadoria com id {}", idMerchandise);
+        return ResponseEntity.ok(merchandiseService.getMerchandiseDeliveryStatus(idMerchandise));
     }
 }

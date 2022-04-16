@@ -2,11 +2,13 @@ package br.com.boaentregadata.service;
 
 import br.com.boaentregadata.dto.DataManipulationDTO;
 import br.com.boaentregadata.dto.MethodDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 
+@Slf4j
 @Service
 public class DataManipulationService {
 
@@ -33,6 +35,7 @@ public class DataManipulationService {
         DataManipulationDTO manipulation = DataManipulationDTO.builder().type("Manipulation")
                 .methodDTOS(Arrays.asList(normalize, truncate))
                 .build();
+        log.info("Construído métodos de Manipulação de Dados");
         return Arrays.asList(dataMining, visualization, manipulation);
     }
 }

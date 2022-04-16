@@ -1,16 +1,11 @@
 package br.com.boaentrega.validator;
 
-import br.com.boaentrega.domain.AbstractEntity;
-import br.com.boaentrega.domain.Merchandise;
 import br.com.boaentrega.domain.User;
-import br.com.boaentrega.exception.UserAlreadyExistsException;
 import br.com.boaentrega.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
-
 @Component
-public class UserValidator extends AbstractValidator<User, Long>{
+public class UserValidator extends AbstractValidator<User, Long> {
 
     private final UserRepository userRepository;
 

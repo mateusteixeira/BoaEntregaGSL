@@ -4,7 +4,6 @@ import br.com.boaentrega.domain.enumeration.Profile;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Getter
 @Setter

@@ -1,7 +1,5 @@
 package br.com.boaentrega.domain;
 
-import lombok.*;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -16,11 +14,13 @@ public abstract class AbstractEntity<ID extends Serializable> implements IEntity
     private ID id;
 
     public abstract String getMainIdentifier();
+
     public abstract String getSecondaryIdentifier();
 
     public ID getId() {
         return this.id;
     }
+
     public void setId(ID id) {
         this.id = id;
     }

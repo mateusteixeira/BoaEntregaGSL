@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/route")
-public class RouteAPI extends AbstractAPI<Route, Long, RouteDTO>{
+public class RouteAPI extends AbstractAPI<Route, Long, RouteDTO> {
 
 
     protected RouteAPI(AbstractService<Route, Long, RouteDTO> abstractService) {

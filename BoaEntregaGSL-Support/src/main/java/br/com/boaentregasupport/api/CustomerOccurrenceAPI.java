@@ -1,80 +1,54 @@
 package br.com.boaentregasupport.api;
 
+import br.com.boaentrega.api.AbstractAPI;
+import br.com.boaentrega.service.AbstractService;
+import br.com.boaentregasupport.domain.CustomerOccurrence;
 import br.com.boaentregasupport.domain.dto.CustomerOccurrenceDTO;
-import br.com.boaentregasupport.service.CustomerOccurrenceService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.net.URI;
 import java.util.List;
 
-@ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Operação realizada com Sucesso!"),
-        @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
-        @ApiResponse(code = 500, message = "Ocorreu um erro interno."),
-})
 @RestController
 @RequestMapping("/customer-occurrence")
-public class CustomerOccurrenceAPI {
+public class CustomerOccurrenceAPI extends AbstractAPI<CustomerOccurrence, Long, CustomerOccurrenceDTO> {
 
-    private final CustomerOccurrenceService customerOccurrenceService;
 
-    public CustomerOccurrenceAPI(CustomerOccurrenceService customerOccurrenceService) {
-        this.customerOccurrenceService = customerOccurrenceService;
+    protected CustomerOccurrenceAPI(AbstractService<CustomerOccurrence, Long, CustomerOccurrenceDTO> abstractService) {
+        super(abstractService);
     }
 
-    @ApiOperation(value = "Cria uma Ocorrência de Usuário")
-    @PostMapping(produces = "application/json", consumes = "application/json")
-    public ResponseEntity<CustomerOccurrenceDTO> createCustomerOccurrence(@RequestBody CustomerOccurrenceDTO customerOccurrenceDTO) {
-        CustomerOccurrenceDTO savedCustomerOccurrenceDTO = this.customerOccurrenceService.createCustomerOccurrence(customerOccurrenceDTO);
-        URI location = getUriToHeader(savedCustomerOccurrenceDTO);
-        return ResponseEntity.created(location).body(savedCustomerOccurrenceDTO);
+    @Override
+    public ResponseEntity<CustomerOccurrenceDTO> createAbstractEntity(@RequestBody CustomerOccurrenceDTO customerOccurrenceDTO) {
+        return super.createAbstractEntity(customerOccurrenceDTO);
     }
 
-    @ApiOperation(value = "Retorna todas as Ocorrência de Usuário")
-    @GetMapping(produces = "application/json")
-    public ResponseEntity<List<CustomerOccurrenceDTO>> getCustomerOccurrences(Pageable pageable) {
-        return ResponseEntity.ok(customerOccurrenceService.getAllCustomerOccurrences(pageable));
+    @Override
+    public ResponseEntity<List<CustomerOccurrenceDTO>> getAbstractEntities(Pageable pageable) {
+        return super.getAbstractEntities(pageable);
     }
 
-    @ApiOperation(value = "Retorna uma Ocorrência de Usuário por Id.")
-    @GetMapping(value = "{id}", produces = "application/text")
-    public ResponseEntity<CustomerOccurrenceDTO> getCustomerOccurrence(@PathVariable(name = "id") Long idCustomerOccurrence) {
-        return ResponseEntity.ok(customerOccurrenceService.getCustomerOccurrenceById(idCustomerOccurrence));
+    @Override
+    public ResponseEntity<CustomerOccurrenceDTO> getAbstractEntity(Long idAbstractEntity) {
+        return super.getAbstractEntity(idAbstractEntity);
     }
 
-    @ApiOperation(value = "Atualiza uma Ocorrência de Usuário por Id.")
-    @PutMapping(value = "{id}", produces = "application/text", consumes = "application/json")
-    public ResponseEntity<Object> updateCustomerOccurrence(@RequestBody CustomerOccurrenceDTO customerOccurrenceDTO, @PathVariable(name = "id") Long idCustomerOccurrence) {
-        customerOccurrenceService.updateCustomerOccurrence(customerOccurrenceDTO, idCustomerOccurrence);
-        return ResponseEntity.noContent().build();
+    @Override
+    public ResponseEntity<Object> updateAbstractEntity(@RequestBody CustomerOccurrenceDTO customerOccurrenceDTO, Long idAbstractEntity) {
+        return super.updateAbstractEntity(customerOccurrenceDTO, idAbstractEntity);
     }
 
-    @ApiOperation(value = "Deleta uma Ocorrência de Usuário por Id.")
-    @DeleteMapping(value = "{id}", produces = "application/text")
-    public ResponseEntity<Object> deleteCustomerOccurrence(@PathVariable(name = "id") Long idCustomerOccurrence) {
-        customerOccurrenceService.deleteCustomerOccurrence(idCustomerOccurrence);
-        return ResponseEntity.ok().build();
+    @Override
+    public ResponseEntity<Object> deleteAbstractEntity(Long idAbstractEntity) {
+        return super.deleteAbstractEntity(idAbstractEntity);
     }
 
-    @ApiOperation(value = "Deleta todas as Ocorrências de Usuário")
-    @DeleteMapping(produces = "application/text")
-    public ResponseEntity<Object> deleteAllCustomerOccurrences() {
-        customerOccurrenceService.deleteAllCustomerOccurrences();
-        return ResponseEntity.ok().build();
-    }
-
-    private URI getUriToHeader(CustomerOccurrenceDTO customerOccurrenceDTO) {
-        return ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(customerOccurrenceDTO.getId())
-                .toUri();
+    @Override
+    public ResponseEntity<Object> deleteAllAbstractEntities() {
+        return super.deleteAllAbstractEntities();
     }
 
 }

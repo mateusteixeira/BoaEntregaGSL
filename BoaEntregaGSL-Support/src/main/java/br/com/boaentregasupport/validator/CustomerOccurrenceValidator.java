@@ -1,14 +1,12 @@
 package br.com.boaentregasupport.validator;
 
+import br.com.boaentrega.validator.AbstractValidator;
 import br.com.boaentregasupport.domain.CustomerOccurrence;
-import br.com.boaentregasupport.exception.CustomerOccurrenceAlreadyExistsException;
 import br.com.boaentregasupport.repository.CustomerOccurrenceRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.Objects;
-
 @Component
-public class CustomerOccurrenceValidator {
+public class CustomerOccurrenceValidator extends AbstractValidator<CustomerOccurrence, Long> {
 
     private final CustomerOccurrenceRepository customerOccurrenceRepository;
 
@@ -16,11 +14,14 @@ public class CustomerOccurrenceValidator {
         this.customerOccurrenceRepository = customerOccurrenceRepository;
     }
 
-    public void validateCustomerOccurrenceExists(CustomerOccurrence customerOccurrence) {
-        CustomerOccurrence existentCustomerOccurrence = customerOccurrenceRepository.findByCode(customerOccurrence.getCode());
-        if (Objects.nonNull(existentCustomerOccurrence)) {
-            throw new CustomerOccurrenceAlreadyExistsException(String.format("CustomerOccurrence already exists for code %s", customerOccurrence.getCode()));
-        }
+    @Override
+    public void validateExistent(CustomerOccurrence customerOccurrence) {
+        CustomerOccurrence byCode = customerOccurrenceRepository.findByCode(customerOccurrence.getCode());
+        super.validate(byCode);
     }
 
+    @Override
+    public String getValidatorName() {
+        return "CustomerOccurrence";
+    }
 }

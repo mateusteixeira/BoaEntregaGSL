@@ -1,16 +1,12 @@
 package br.com.boaentrega.translator;
 
-import br.com.boaentrega.domain.Merchandise;
 import br.com.boaentrega.domain.Route;
-import br.com.boaentrega.domain.dto.MerchandiseDTO;
 import br.com.boaentrega.domain.dto.RouteDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingInheritanceStrategy;
-import org.mapstruct.MappingTarget;
-import org.springframework.stereotype.Service;
 
 @Mapper(mappingInheritanceStrategy = MappingInheritanceStrategy.AUTO_INHERIT_ALL_FROM_CONFIG)
-public interface RouteTranslator extends AbstractTranslator<Route, Long, RouteDTO>{
+public interface RouteTranslator extends AbstractTranslator<Route, Long, RouteDTO> {
 
 //
 //    @Override

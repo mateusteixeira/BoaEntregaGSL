@@ -38,6 +38,7 @@ public class UserProfileService {
     public void putUserToApproval(UserDTO userDTO) {
         UserToApprove userToApprove = UserToApprove.builder().idUser(userDTO.getId()).build();
         userToApproveRepository.save(userToApprove);
+        log.info("Usuário {} salvo no mongo para posterior aprovação", userDTO);
     }
 
     public void approveUser(ApproveUserDTO approveUserDTO, Long idApprovalUser) {
@@ -51,6 +52,7 @@ public class UserProfileService {
         userProfile = userProfileRepository.save(userProfile);
         userService.activeUser(user, userProfile);
         userToApproveRepository.deleteByIdUser(user.getId());
+        log.info("Usuário {} aprovado com sucesso", user);
     }
 
     public List<UserDTO> getAllUsersToApprove(Long idApprovalUser) {

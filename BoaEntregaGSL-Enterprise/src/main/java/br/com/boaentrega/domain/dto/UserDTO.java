@@ -7,8 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Data
 @Builder
@@ -45,12 +44,23 @@ public class UserDTO extends AbstractDTO {
     private String profile;
 
     @Override
+    @ApiIgnore
+    @ApiModelProperty(hidden = true)
     public String getMainIdentifier() {
-        return null;
+        return email;
     }
 
     @Override
+    @ApiIgnore
+    @ApiModelProperty(hidden = true)
     public String getSecondaryIdentifier() {
-        return null;
+        return firstName;
+    }
+
+    @Override
+    @ApiIgnore
+    @ApiModelProperty(hidden = true)
+    public Long getId() {
+        return id;
     }
 }

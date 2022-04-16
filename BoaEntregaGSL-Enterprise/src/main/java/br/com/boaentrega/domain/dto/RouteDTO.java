@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Data
 @Builder
@@ -38,12 +39,23 @@ public class RouteDTO extends AbstractDTO {
     private Long durationInDays;
 
     @Override
+    @ApiIgnore
+    @ApiModelProperty(hidden = true)
     public String getMainIdentifier() {
-        return null;
+        return cityFrom;
     }
 
     @Override
+    @ApiIgnore
+    @ApiModelProperty(hidden = true)
     public String getSecondaryIdentifier() {
-        return null;
+        return cityTo;
+    }
+
+    @Override
+    @ApiIgnore
+    @ApiModelProperty(hidden = true)
+    public Long getId() {
+        return id;
     }
 }

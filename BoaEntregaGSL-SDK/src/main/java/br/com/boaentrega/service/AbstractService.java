@@ -15,7 +15,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class AbstractService <T extends AbstractEntity<ID>, ID extends Serializable, R extends AbstractDTO> {
+public class AbstractService<T extends AbstractEntity<ID>, ID extends Serializable, R extends AbstractDTO> {
 
     protected final AbstractValidator<T, ID> abstractValidator;
 
@@ -34,7 +34,9 @@ public class AbstractService <T extends AbstractEntity<ID>, ID extends Serializa
         log.info("Creating {} - {}", abstractDTO.getClass(), abstractDTO.getMainIdentifier());
         T iEntity = abstractTranslator.toEntity(abstractDTO);
         abstractValidator.validateExistent(iEntity);
-        return abstractTranslator.toDTO(abstractRepository.save(iEntity));
+        R toDTO = abstractTranslator.toDTO(abstractRepository.save(iEntity));
+        log.info("Created {} - {}", toDTO.getClass(), toDTO.getMainIdentifier());
+        return toDTO;
     }
 
     public R getAbstractById(ID id) {
@@ -56,6 +58,7 @@ public class AbstractService <T extends AbstractEntity<ID>, ID extends Serializa
         T abstractEntity = getAbstractOrThrowNotFoundException(id);
         abstractTranslator.update(abstractEntity, abstractDTO);
         abstractRepository.save(abstractEntity);
+        log.info("Updated abstract: {}", abstractDTO.getMainIdentifier());
     }
 
     public void deleteAbstract(ID idAbstract) {

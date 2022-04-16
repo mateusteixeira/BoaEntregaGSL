@@ -3,7 +3,6 @@ package br.com.boaentrega.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Getter
 @Setter
@@ -36,11 +35,11 @@ public class WareHouse extends AbstractEntity<Long> {
 
     @Override
     public String getMainIdentifier() {
-        return null;
+        return String.valueOf(code);
     }
 
     @Override
     public String getSecondaryIdentifier() {
-        return null;
+        return name;
     }
 }

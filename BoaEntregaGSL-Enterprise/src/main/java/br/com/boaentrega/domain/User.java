@@ -3,7 +3,6 @@ package br.com.boaentrega.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Getter
 @Setter
@@ -42,11 +41,11 @@ public class User extends AbstractEntity<Long> {
 
     @Override
     public String getMainIdentifier() {
-        return null;
+        return email;
     }
 
     @Override
     public String getSecondaryIdentifier() {
-        return null;
+        return firstName;
     }
 }

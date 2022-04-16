@@ -3,7 +3,6 @@ package br.com.boaentrega.domain;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Getter
 @Setter
@@ -40,11 +39,11 @@ public class Route extends AbstractEntity<Long> {
 
     @Override
     public String getMainIdentifier() {
-        return null;
+        return cityFrom;
     }
 
     @Override
     public String getSecondaryIdentifier() {
-        return null;
+        return cityTo;
     }
 }

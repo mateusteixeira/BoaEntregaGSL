@@ -42,6 +42,7 @@ public class SpringFoxConfig {
                 .apis(RequestHandlerSelectors.basePackage("br.com.boaentregadata.api"))
                 .paths(PathSelectors.any())
                 .build()
+                .host("localhost")
                 .globalResponseMessage(RequestMethod.GET, responseMessageFor())
                 .globalResponseMessage(RequestMethod.POST, responseMessageFor())
                 .globalResponseMessage(RequestMethod.PUT, responseMessageFor())

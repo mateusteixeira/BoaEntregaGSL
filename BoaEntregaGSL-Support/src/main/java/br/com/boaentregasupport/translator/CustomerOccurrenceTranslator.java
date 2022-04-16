@@ -1,17 +1,12 @@
 package br.com.boaentregasupport.translator;
 
+import br.com.boaentrega.translator.AbstractTranslator;
 import br.com.boaentregasupport.domain.CustomerOccurrence;
 import br.com.boaentregasupport.domain.dto.CustomerOccurrenceDTO;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.MappingInheritanceStrategy;
 
-@Mapper
-public interface CustomerOccurrenceTranslator {
-
-    CustomerOccurrenceDTO toDTO(CustomerOccurrence customerOccurrence);
-
-    CustomerOccurrence toEntity(CustomerOccurrenceDTO customerOccurrenceDTO);
-
-    void update(@MappingTarget CustomerOccurrence customerOccurrence, CustomerOccurrenceDTO customerOccurrenceDTO);
+@Mapper(mappingInheritanceStrategy = MappingInheritanceStrategy.AUTO_INHERIT_ALL_FROM_CONFIG)
+public interface CustomerOccurrenceTranslator extends AbstractTranslator<CustomerOccurrence, Long, CustomerOccurrenceDTO> {
 
 }

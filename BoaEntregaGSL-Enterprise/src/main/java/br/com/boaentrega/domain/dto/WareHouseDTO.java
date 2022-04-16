@@ -7,8 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.io.Serializable;
+import springfox.documentation.annotations.ApiIgnore;
 
 @Data
 @Builder
@@ -37,12 +36,23 @@ public class WareHouseDTO extends AbstractDTO {
     private String location;
 
     @Override
+    @ApiIgnore
+    @ApiModelProperty(hidden = true)
     public String getMainIdentifier() {
-        return null;
+        return String.valueOf(code);
     }
 
     @Override
+    @ApiIgnore
+    @ApiModelProperty(hidden = true)
     public String getSecondaryIdentifier() {
-        return null;
+        return name;
+    }
+
+    @Override
+    @ApiIgnore
+    @ApiModelProperty(hidden = true)
+    public Long getId() {
+        return id;
     }
 }

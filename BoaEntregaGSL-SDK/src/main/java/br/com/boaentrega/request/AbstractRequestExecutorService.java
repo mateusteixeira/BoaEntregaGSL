@@ -1,6 +1,7 @@
 package br.com.boaentrega.request;
 
 import br.com.boaentrega.exception.RequestExecutorException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
@@ -12,8 +13,9 @@ import org.springframework.web.util.UriTemplate;
 import java.net.URI;
 import java.util.Map;
 
+@Slf4j
 @Component
-public abstract class AbstractRequestExecutorService<R extends BoaEntregaGSLExternalUrls>{
+public abstract class AbstractRequestExecutorService<R extends BoaEntregaGSLExternalUrls> {
 
     private final RestTemplate restTemplate;
 
@@ -38,8 +40,10 @@ public abstract class AbstractRequestExecutorService<R extends BoaEntregaGSLExte
 
         final RequestEntity<Object> request = new RequestEntity<>(value, new HttpHeaders(), method, uri);
         try {
+            log.info("Fazendo request method {} to {}", method, url);
             return restTemplate.exchange(request, responseType);
         } catch (Exception e) {
+            log.error("Erro ao fazer request, error: {}", e.getMessage());
             throw new RequestExecutorException(e.getMessage());
         }
     }

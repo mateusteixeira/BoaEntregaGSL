@@ -1,10 +1,10 @@
 package br.com.boaentregasupport.domain;
 
+import br.com.boaentrega.domain.AbstractEntity;
 import br.com.boaentregasupport.domain.enumeration.OccurrenceStatus;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Getter
 @Setter
@@ -13,15 +13,10 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "CUSTOMER_OCCURRENCE")
-public class CustomerOccurrence implements Serializable {
+@SequenceGenerator(name = AbstractEntity.SEQ_NAME, sequenceName = "CUSTOMER_OCCURRENCE_SEQ", initialValue = 0, allocationSize = 1)
+public class CustomerOccurrence extends AbstractEntity<Long> {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @SequenceGenerator(name = "CUSTOMER_OCCURRENCE_SEQ_GEN", sequenceName = "CUSTOMER_OCCURRENCE_SEQ", initialValue = 0, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUSTOMER_OCCURRENCE_SEQ_GEN")
-    @Column(name = "ID")
-    private Long id;
 
     @Column(name = "CODE")
     private Long code;
@@ -36,6 +31,15 @@ public class CustomerOccurrence implements Serializable {
     @Enumerated(EnumType.STRING)
     private OccurrenceStatus occurrenceStatus;
 
+    @Override
+    public String getMainIdentifier() {
+        return String.valueOf(super.getId());
+    }
+
+    @Override
+    public String getSecondaryIdentifier() {
+        return String.valueOf(this.code);
+    }
 }
 
 

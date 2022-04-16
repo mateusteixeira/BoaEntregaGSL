@@ -1,12 +1,8 @@
 package br.com.boaentrega.validator;
 
-import br.com.boaentrega.domain.Merchandise;
 import br.com.boaentrega.domain.WareHouse;
-import br.com.boaentrega.exception.WareHouseAlreadyExistsException;
 import br.com.boaentrega.repository.WareHouseRepository;
 import org.springframework.stereotype.Component;
-
-import java.util.Objects;
 
 @Component
 public class WareHouseValidator extends AbstractValidator<WareHouse, Long> {

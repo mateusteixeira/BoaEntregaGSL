@@ -3,20 +3,13 @@ package br.com.boaentrega.service;
 import br.com.boaentrega.domain.User;
 import br.com.boaentrega.domain.UserProfile;
 import br.com.boaentrega.domain.dto.UserDTO;
-import br.com.boaentrega.exception.UserNotFoundException;
 import br.com.boaentrega.repository.IJpaRepository;
 import br.com.boaentrega.translator.AbstractTranslator;
 import br.com.boaentrega.validator.AbstractValidator;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 @Service
-public class UserService extends AbstractService<User, Long, UserDTO>{
+public class UserService extends AbstractService<User, Long, UserDTO> {
 
     private final UserProfileService userProfileService;
 
@@ -25,7 +18,8 @@ public class UserService extends AbstractService<User, Long, UserDTO>{
         this.userProfileService = userProfileService;
     }
 
-    public UserDTO createUser(UserDTO userDTO) {
+    @Override
+    public UserDTO createAbstract(UserDTO userDTO) {
         UserDTO userDTOSaved = super.createAbstract(userDTO);
         userProfileService.putUserToApproval(userDTOSaved);
         return userDTOSaved;
