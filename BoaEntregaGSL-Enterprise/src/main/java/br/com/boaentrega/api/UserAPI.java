@@ -1,7 +1,9 @@
 package br.com.boaentrega.api;
 
 
+import br.com.boaentrega.domain.User;
 import br.com.boaentrega.domain.dto.UserDTO;
+import br.com.boaentrega.service.AbstractService;
 import br.com.boaentrega.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -14,68 +16,41 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-@ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Operação realizada com Sucesso!"),
-        @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
-        @ApiResponse(code = 500, message = "Ocorreu um erro interno."),
-})
 @RestController
 @RequestMapping("/user")
-public class UserAPI {
+public class UserAPI extends AbstractAPI<User, Long, UserDTO>{
 
-    private final UserService userService;
-
-    public UserAPI(UserService userService) {
-        this.userService = userService;
+    protected UserAPI(AbstractService<User, Long, UserDTO> abstractService) {
+        super(abstractService);
     }
 
-    @ApiOperation(value = "Cria um Usuário")
-    @PostMapping(produces = "application/json", consumes = "application/json")
-    public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO userDTO) {
-        UserDTO savedUserDTO = this.userService.createUser(userDTO);
-        URI location = getUriToHeader(savedUserDTO);
-        return ResponseEntity.created(location).body(savedUserDTO);
+    @Override
+    public ResponseEntity<UserDTO> createAbstractEntity(@RequestBody UserDTO userDTO) {
+        return super.createAbstractEntity(userDTO);
     }
 
-    @ApiOperation(value = "Retorna todos os Usuários")
-    @GetMapping(produces = "application/json")
-    public ResponseEntity<List<UserDTO>> getUsers(Pageable pageable) {
-        return ResponseEntity.ok(userService.getAllUsers(pageable));
+    @Override
+    public ResponseEntity<List<UserDTO>> getAbstractEntities(Pageable pageable) {
+        return super.getAbstractEntities(pageable);
     }
 
-    @ApiOperation(value = "Retorna um Usuário por Id.")
-    @GetMapping(value = "{id}", produces = "application/json")
-    public ResponseEntity<UserDTO> getUser(@PathVariable(name = "id") Long idUser) {
-        return ResponseEntity.ok(userService.getUserById(idUser));
+    @Override
+    public ResponseEntity<UserDTO> getAbstractEntity(Long idAbstractEntity) {
+        return super.getAbstractEntity(idAbstractEntity);
     }
 
-    @ApiOperation(value = "Atualiza um Usuário por Id.")
-    @PutMapping(value = "{id}", produces = "application/text", consumes = "application/json")
-    public ResponseEntity<Object> updateUser(@RequestBody UserDTO userDTO, @PathVariable(name = "id") Long idUser) {
-        userService.updateUser(userDTO, idUser);
-        return ResponseEntity.noContent().build();
+    @Override
+    public ResponseEntity<Object> updateAbstractEntity(@RequestBody UserDTO userDTO, Long idAbstractEntity) {
+        return super.updateAbstractEntity(userDTO, idAbstractEntity);
     }
 
-    @ApiOperation(value = "Deleta um Usuário por Id.")
-    @DeleteMapping(value = "{id}", produces = "application/text")
-    public ResponseEntity<Object> deleteUser(@PathVariable(name = "id") Long idUser) {
-        userService.deleteUser(idUser);
-        return ResponseEntity.ok().build();
+    @Override
+    public ResponseEntity<Object> deleteAbstractEntity(Long idAbstractEntity) {
+        return super.deleteAbstractEntity(idAbstractEntity);
     }
 
-    @ApiOperation(value = "Deleta todos os Usuários.")
-    @DeleteMapping(produces = "application/text")
-    public ResponseEntity<Object> deleteAllUsers() {
-        userService.deleteAllUsers();
-        return ResponseEntity.ok().build();
+    @Override
+    public ResponseEntity<Object> deleteAllAbstractEntities() {
+        return super.deleteAllAbstractEntities();
     }
-
-    private URI getUriToHeader(UserDTO userDTO) {
-        return ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(userDTO.getId())
-                .toUri();
-    }
-
 }

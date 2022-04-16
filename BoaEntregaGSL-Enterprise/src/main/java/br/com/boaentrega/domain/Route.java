@@ -8,11 +8,12 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Entity
+@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "ROUTE")
-public class Route implements Serializable {
+public class Route extends AbstractEntity<Long> {
 
     private static final long serialVersionUID = 1L;
 
@@ -37,4 +38,13 @@ public class Route implements Serializable {
     @Column(name = "DURATION_IN_DAYS")
     private Long durationInDays;
 
+    @Override
+    public String getMainIdentifier() {
+        return null;
+    }
+
+    @Override
+    public String getSecondaryIdentifier() {
+        return null;
+    }
 }

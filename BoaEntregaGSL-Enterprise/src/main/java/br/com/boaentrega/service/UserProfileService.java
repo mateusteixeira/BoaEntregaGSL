@@ -35,8 +35,8 @@ public class UserProfileService {
         this.userToApproveRepository = userToApproveRepository;
     }
 
-    public void putUserToApproval(User user) {
-        UserToApprove userToApprove = UserToApprove.builder().idUser(user.getId()).build();
+    public void putUserToApproval(UserDTO userDTO) {
+        UserToApprove userToApprove = UserToApprove.builder().idUser(userDTO.getId()).build();
         userToApproveRepository.save(userToApprove);
     }
 

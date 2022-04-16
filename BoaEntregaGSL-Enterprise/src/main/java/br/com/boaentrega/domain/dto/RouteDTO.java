@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RouteDTO {
+public class RouteDTO extends AbstractDTO {
 
     @JsonProperty("id")
     @ApiModelProperty(value = "Identificador da Rota")
@@ -37,4 +37,13 @@ public class RouteDTO {
     @ApiModelProperty(value = "Duração de entrega da Rota")
     private Long durationInDays;
 
+    @Override
+    public String getMainIdentifier() {
+        return null;
+    }
+
+    @Override
+    public String getSecondaryIdentifier() {
+        return null;
+    }
 }

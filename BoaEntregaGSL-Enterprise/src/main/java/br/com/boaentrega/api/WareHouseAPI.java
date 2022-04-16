@@ -1,7 +1,9 @@
 package br.com.boaentrega.api;
 
 
+import br.com.boaentrega.domain.WareHouse;
 import br.com.boaentrega.domain.dto.WareHouseDTO;
+import br.com.boaentrega.service.AbstractService;
 import br.com.boaentrega.service.WareHouseService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -14,68 +16,42 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
 
-@ApiResponses(value = {
-        @ApiResponse(code = 200, message = "Operação realizada com Sucesso!"),
-        @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
-        @ApiResponse(code = 500, message = "Ocorreu um erro interno."),
-})
 @RestController
 @RequestMapping("/warehouse")
-public class WareHouseAPI {
+public class WareHouseAPI extends AbstractAPI<WareHouse, Long, WareHouseDTO>{
 
-    private final WareHouseService wareHouseService;
 
-    public WareHouseAPI(WareHouseService wareHouseService) {
-        this.wareHouseService = wareHouseService;
+    protected WareHouseAPI(AbstractService<WareHouse, Long, WareHouseDTO> abstractService) {
+        super(abstractService);
     }
 
-    @ApiOperation(value = "Cria um Depósito")
-    @PostMapping(produces = "application/json", consumes = "application/json")
-    public ResponseEntity<WareHouseDTO> createWareHouse(@RequestBody WareHouseDTO wareHouseDTO) {
-        WareHouseDTO savedWareHouseDTO = this.wareHouseService.createWareHouse(wareHouseDTO);
-        URI location = getUriToHeader(savedWareHouseDTO);
-        return ResponseEntity.created(location).body(savedWareHouseDTO);
+    @Override
+    public ResponseEntity<WareHouseDTO> createAbstractEntity(@RequestBody WareHouseDTO wareHouseDTO) {
+        return super.createAbstractEntity(wareHouseDTO);
     }
 
-    @ApiOperation(value = "Retorna todos os Depósitos")
-    @GetMapping(produces = "application/json")
-    public ResponseEntity<List<WareHouseDTO>> getWareHouses(Pageable pageable) {
-        return ResponseEntity.ok(wareHouseService.getAllWareHouses(pageable));
+    @Override
+    public ResponseEntity<List<WareHouseDTO>> getAbstractEntities(Pageable pageable) {
+        return super.getAbstractEntities(pageable);
     }
 
-    @ApiOperation(value = "Retorna um Depósito por Id.")
-    @GetMapping(value = "{id}", produces = "application/json")
-    public ResponseEntity<WareHouseDTO> getWareHouse(@PathVariable(name = "id") Long idWareHouse) {
-        return ResponseEntity.ok(wareHouseService.getWareHouseById(idWareHouse));
+    @Override
+    public ResponseEntity<WareHouseDTO> getAbstractEntity(Long idAbstractEntity) {
+        return super.getAbstractEntity(idAbstractEntity);
     }
 
-    @ApiOperation(value = "Atualiza um Depóstio por Id.")
-    @PutMapping(value = "{id}", produces = "application/text", consumes = "application/json")
-    public ResponseEntity<Object> updateWareHouse(@RequestBody WareHouseDTO wareHouseDTO, @PathVariable(name = "id") Long idWareHouse) {
-        wareHouseService.updateWareHouse(wareHouseDTO, idWareHouse);
-        return ResponseEntity.noContent().build();
+    @Override
+    public ResponseEntity<Object> updateAbstractEntity(@RequestBody WareHouseDTO wareHouseDTO, Long idAbstractEntity) {
+        return super.updateAbstractEntity(wareHouseDTO, idAbstractEntity);
     }
 
-    @ApiOperation(value = "Deleta um Depóstio por Id.")
-    @DeleteMapping(value = "{id}", produces = "application/text")
-    public ResponseEntity<Object> deleteWareHouse(@PathVariable(name = "id") Long idWareHouse) {
-        wareHouseService.deleteWareHouse(idWareHouse);
-        return ResponseEntity.ok().build();
+    @Override
+    public ResponseEntity<Object> deleteAbstractEntity(Long idAbstractEntity) {
+        return super.deleteAbstractEntity(idAbstractEntity);
     }
 
-    @ApiOperation(value = "Deleta todos os Depósitos.")
-    @DeleteMapping(produces = "application/text")
-    public ResponseEntity<Object> deleteAllWareHouses() {
-        wareHouseService.deleteAllWareHouses();
-        return ResponseEntity.ok().build();
+    @Override
+    public ResponseEntity<Object> deleteAllAbstractEntities() {
+        return super.deleteAllAbstractEntities();
     }
-
-    private URI getUriToHeader(WareHouseDTO wareHouseDTO) {
-        return ServletUriComponentsBuilder
-                .fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(wareHouseDTO.getId())
-                .toUri();
-    }
-
 }

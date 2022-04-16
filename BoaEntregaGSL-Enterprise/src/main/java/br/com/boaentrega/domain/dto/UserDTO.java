@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDTO implements Serializable {
+public class UserDTO extends AbstractDTO {
 
     @JsonProperty("code")
     @ApiModelProperty(value = "Identificador do Usuário")
@@ -43,4 +43,14 @@ public class UserDTO implements Serializable {
     @JsonProperty("profile")
     @ApiModelProperty(value = "Perfil atribuído ao Usuário")
     private String profile;
+
+    @Override
+    public String getMainIdentifier() {
+        return null;
+    }
+
+    @Override
+    public String getSecondaryIdentifier() {
+        return null;
+    }
 }

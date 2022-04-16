@@ -12,7 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "WARE_HOUSE")
-public class WareHouse implements Serializable {
+public class WareHouse extends AbstractEntity<Long> {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,4 +33,14 @@ public class WareHouse implements Serializable {
 
     @Column(name = "LOCATION")
     private String location;
+
+    @Override
+    public String getMainIdentifier() {
+        return null;
+    }
+
+    @Override
+    public String getSecondaryIdentifier() {
+        return null;
+    }
 }

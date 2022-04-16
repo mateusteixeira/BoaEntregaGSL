@@ -10,9 +10,11 @@ import org.mapstruct.MappingTarget;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-public abstract class AbstractTranslator<T extends AbstractEntity, R extends AbstractDTO> implements ITranslator{
+import java.io.Serializable;
 
-    public abstract R toDTO(T iEntity);
-    public abstract T toEntity(R abstractDTO);
-    public abstract void update(T iEntity, R abstractDTO);
+public interface AbstractTranslator<T extends AbstractEntity<ID>, ID extends Serializable, R extends AbstractDTO> extends ITranslator{
+
+    R toDTO(T iEntity);
+    T toEntity(R abstractDTO);
+    void update(@MappingTarget T iEntity, R abstractDTO);
 }

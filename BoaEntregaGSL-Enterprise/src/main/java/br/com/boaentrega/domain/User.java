@@ -12,7 +12,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "USER")
-public class User implements Serializable {
+public class User extends AbstractEntity<Long> {
 
     private static final long serialVersionUID = 1L;
 
@@ -40,4 +40,13 @@ public class User implements Serializable {
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "user")
     private UserProfile userProfile;
 
+    @Override
+    public String getMainIdentifier() {
+        return null;
+    }
+
+    @Override
+    public String getSecondaryIdentifier() {
+        return null;
+    }
 }

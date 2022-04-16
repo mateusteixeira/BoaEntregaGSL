@@ -44,6 +44,11 @@
             <artifactId>liquibase-core</artifactId>
             <version>4.9.1</version>
         </dependency>
+        <dependency>
+            <groupId>br.com.boaentrega.sdk</groupId>
+            <artifactId>BoaEntregaGSL-SDK</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

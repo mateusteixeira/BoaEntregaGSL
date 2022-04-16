@@ -7,14 +7,17 @@ import br.com.boaentrega.repository.IJpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 @Service
-public abstract class AbstractValidator<T extends AbstractEntity> implements IValidator{
+public abstract class AbstractValidator<T extends AbstractEntity<ID>, ID extends Serializable> implements IValidator{
 
-    protected void validate(AbstractEntity abstractEntity){
+    protected void validate(T abstractEntity){
         if (Objects.nonNull(abstractEntity)) {
             throw new IEntityAlreadyExistsException(String.format("%s already exists for %s - %s", getValidatorName(), abstractEntity.getMainIdentifier(), abstractEntity.getSecondaryIdentifier()));
         }
     }
+
+    public abstract void validateExistent(T abstractEntity);
 }

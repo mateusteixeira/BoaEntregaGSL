@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class WareHouseDTO implements Serializable {
+public class WareHouseDTO extends AbstractDTO {
 
     @JsonProperty("id")
     @ApiModelProperty(value = "Identificador do Depósito")
@@ -35,4 +35,14 @@ public class WareHouseDTO implements Serializable {
     @JsonProperty("location")
     @ApiModelProperty(value = "Localização do Depósito")
     private String location;
+
+    @Override
+    public String getMainIdentifier() {
+        return null;
+    }
+
+    @Override
+    public String getSecondaryIdentifier() {
+        return null;
+    }
 }

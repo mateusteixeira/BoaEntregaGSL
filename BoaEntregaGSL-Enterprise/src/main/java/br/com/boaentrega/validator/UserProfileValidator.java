@@ -25,7 +25,7 @@ public class UserProfileValidator {
         User user = userService.getUserOrThrowNotFoundException(idApprovalUser);
         UserProfile userProfile = user.getUserProfile();
         if (Objects.isNull(userProfile) || !Profile.ADMINISTRATOR.equals(userProfile.getProfile())) {
-            throw new UnauthorizedOperationException(format("O usuário {} não tem autorização para este recurso", idApprovalUser));
+            throw new UnauthorizedOperationException(format("O usuário %s não tem autorização para este recurso", idApprovalUser));
         }
     }
 }

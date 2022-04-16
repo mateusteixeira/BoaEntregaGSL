@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface WareHouseRepository extends JpaRepository<WareHouse, Long> {
+public interface WareHouseRepository extends IJpaRepository<WareHouse, Long> {
     WareHouse findByCode(Long code);
 }

@@ -1,7 +1,8 @@
 package br.com.boaentrega.domain;
 
-public interface IEntity {
+import java.io.Serializable;
 
-    String getMainIdentifier();
-    String getSecondaryIdentifier();
+@FunctionalInterface
+public interface IEntity<T extends Serializable> {
+    T getId();
 }

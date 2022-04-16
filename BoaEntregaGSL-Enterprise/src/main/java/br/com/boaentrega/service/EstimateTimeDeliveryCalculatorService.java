@@ -29,7 +29,6 @@ public class EstimateTimeDeliveryCalculatorService {
         this.estimatedTimeCalculationSender = estimatedTimeCalculationSender;
     }
 
-
     public void calculate(EstimatedTimeCalculationMessage estimatedTimeCalculationMessage) {
         Long idRoute = estimatedTimeCalculationMessage.getId();
         Route route = routeService.getRouteOrThrowNotFoundException(idRoute);
@@ -38,11 +37,11 @@ public class EstimateTimeDeliveryCalculatorService {
         routeService.saveRoute(routeTranslator.toEntity(routeSavedInSGE));
     }
 
-    public void putInQueue(Route route) {
+    public void putInQueue(RouteDTO routeDTO) {
         EstimatedTimeCalculationMessage estimatedTimeCalculationMessage = EstimatedTimeCalculationMessage.builder()
-                .id(route.getId())
-                .cityFrom(route.getCityFrom())
-                .cityTo(route.getCityTo())
+                .id(routeDTO.getId())
+                .cityFrom(routeDTO.getCityFrom())
+                .cityTo(routeDTO.getCityTo())
                 .build();
         estimatedTimeCalculationSender.sendMessage(estimatedTimeCalculationMessage);
     }
