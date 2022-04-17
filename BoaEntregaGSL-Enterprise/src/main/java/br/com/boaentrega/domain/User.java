@@ -7,19 +7,15 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
+@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "USER")
+@Table(name="\"user\"")
+@SequenceGenerator(name = AbstractEntity.SEQ_NAME, sequenceName = "USER_SEQ", initialValue = 0, allocationSize = 1)
 public class User extends AbstractEntity<Long> {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @Column(name = "ID")
-    @SequenceGenerator(name = "USER_SEQ_GEN", sequenceName = "USER_SEQ", initialValue = 0, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_SEQ_GEN")
-    private Long id;
 
     @Column(name = "LOGIN")
     private String login;

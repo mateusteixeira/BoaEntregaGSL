@@ -45,7 +45,7 @@ Projeto criado como parte de desafio técnico.
     * [RabbitMQ](https://spring.io/guides/gs/messaging-rabbitmq/)
     * [WebMvcTest](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/autoconfigure/web/servlet/WebMvcTest.html)
 - **Postman**: [8.12.14](https://www.postman.com/downloads/)
-- **CircleCi**:(https://app.circleci.com/pipelines/github/mateusteixeira/digital-wallet)
+- **CircleCi**:(https://app.circleci.com/pipelines/github/mateusteixeira/BoaEntregaGSL)
 
 ---
 

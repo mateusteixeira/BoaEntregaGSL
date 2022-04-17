@@ -11,15 +11,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "WARE_HOUSE")
+@SequenceGenerator(name = AbstractEntity.SEQ_NAME, sequenceName = "WARE_HOUSE_SEQ", initialValue = 0, allocationSize = 1)
 public class WareHouse extends AbstractEntity<Long> {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @Column(name = "ID")
-    @SequenceGenerator(name = "WARE_HOUSE_SEQ_GEN", sequenceName = "WARE_HOUSE_SEQ", initialValue = 0, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "WARE_HOUSE_SEQ_GEN")
-    private Long id;
 
     @Column(name = "CODE")
     private Long code;

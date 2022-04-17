@@ -13,15 +13,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "USER_PROFILE")
+@SequenceGenerator(name = AbstractEntity.SEQ_NAME, sequenceName = "USER_PROFILE_SEQ", initialValue = 0, allocationSize = 1)
 public class UserProfile extends AbstractEntity<Long> {
 
     private static final long serialVersionUID = 1L;
-
-    @Id
-    @Column(name = "ID")
-    @SequenceGenerator(name = "USER_PROFILE_SEQ_GEN", sequenceName = "USER_PROFILE_SEQ", initialValue = 0, allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "USER_PROFILE_SEQ_GEN")
-    private Long id;
 
     @Column(name = "PROFILE")
     @Enumerated(EnumType.STRING)
