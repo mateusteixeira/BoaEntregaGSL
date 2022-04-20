@@ -22,7 +22,7 @@ import java.util.List;
         @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso."),
         @ApiResponse(code = 500, message = "Ocorreu um erro interno."),
 })
-public abstract class AbstractAPI<T extends AbstractEntity<ID>, ID extends Serializable, R extends AbstractDTO> {
+public class AbstractAPI<T extends AbstractEntity<ID>, ID extends Serializable, R extends AbstractDTO> {
 
     private final AbstractService<T, ID, R> abstractService;
 
