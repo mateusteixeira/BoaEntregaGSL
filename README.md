@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/mateusteixeira/BoaEntregaGSL/tree/main.svg?style=svg)](https://circleci.com/gh/mateusteixeira/BoaEntregaGSL/tree/main)
 
-Projeto criado como parte de desafio técnico.
+Projeto criado como parte de Trabalho de Conclusão de Curso da Especialização em Arquitetura de Software Distribuído da PUC Minas
 
 ---
 
@@ -31,6 +31,7 @@ Projeto criado como parte de desafio técnico.
 
 - **Java**: [11.0.12](https://www.oracle.com/java/technologies/downloads/#java11)
 - **Apache Maven**: [3.6.3](https://maven.apache.org/)
+- **PostgreSQL**: [14.2](https://www.postgresql.org/)
 - **MongoDB**: [4.4](https://www.mongodb.com/)
 - **RabbitMQ**: [3](https://www.rabbitmq.com/)
 - **Docker**: [20.10.18](https://www.docker.com/)
@@ -41,9 +42,14 @@ Projeto criado como parte de desafio técnico.
 - **Spring-Boot**: [2.5.6](https://spring.io/projects/spring-boot)
     * [Lombok](https://projectlombok.org/)
     * [Test](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html)
+    * [PostgreSQL](https://docs.spring.io/spring-data/jdbc/docs/current/reference/html/)
+    * [Liquibase](https://docs.liquibase.com/tools-integrations/springboot/springboot.html)
     * [MongoDB](https://spring.io/guides/gs/accessing-data-mongodb/)
     * [RabbitMQ](https://spring.io/guides/gs/messaging-rabbitmq/)
     * [WebMvcTest](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/test/autoconfigure/web/servlet/WebMvcTest.html)
+- **Prometheus**: [1.8.5](https://micrometer.io/)
+- **Grafana**: [3.0.1](https://grafana.com/)
+- **Swagger**: [2.9.2](https://swagger.io/)
 - **Postman**: [8.12.14](https://www.postman.com/downloads/)
 - **CircleCi**:(https://app.circleci.com/pipelines/github/mateusteixeira/BoaEntregaGSL)
 
@@ -85,7 +91,7 @@ Para a utilização da aplicação é necessário, obrigatoriamente, o docker/do
 
 ### Inicialização-da-aplicação
 
-Na parta raiz do projeto é necessário executar a compilação e empacotamento, que pode ser feito através do comando:
+Na parta raiz do projeto é necessário entrar no projeto BoaEntregaGSL - SDK e executar a compilação e empacotamento, que pode ser feito através do comando:
 
 ```
 mvn clean install
@@ -97,6 +103,8 @@ Ou:
 mvn package
 ```
 
+Com isso será gerado a dependência para o restante do projeto. Após compilar a SDK é necessário executar os mesmos comandos acima na pasta raiz do projeto.
+
 Após a compilação e empacotamento com sucesso do projeto, deverá ser executado o docker/docker-compose para que seja
 construída a imagem da aplicação e iniciado os containers com a aplicação e os sistemas acessórios da aplicação
 principal.
@@ -105,40 +113,47 @@ principal.
 docker-compose up --build
 ```
 
-Com o comando acima, executado na raiz do projeto, será feito a construção do arquivo docker-compose.yml, que se
-encontra na raiz do projeto, e este será responsável pela inicialização de todo o ambiente.
+Com o comando acima, executado na pasta docker do projeto, será feito a construção do arquivo docker-compose.yml, que se
+encontra na mesma pasta, e este será responsável pela inicialização de todo o ambiente.
 
 No arquivo docker-compose.yml, encontra-se a definição das imagens que serão utilizadas e os containers que serão
-construído e inicializados. Neste caso, as configurações são da aplicação em si, além da imagem do RabbitMQ, do MongoDB
-e toda a configuração de porta de comunicação entre os containers e também fora do container.
+construído e inicializados. Neste caso, as configurações são da aplicação em si. Será inicializado os containers dos bancos
+de dados PostgresSQL da aplicação, o MongoDB, o NGINX, os monitoramentos e as aplicações, além de preparar o restante do ambiente.
 
 ## Utilizando-a-aplicação
 
-Após inicializar os containers a aplicação ficará disponível na porta 8888 do localhost e deverá ser usada a collection
-do Postman [disponível aqui](https://www.getpostman.com/collections/61d9b9ca235620d75e17)
-para fazer as requisições. Na collection já esta disponível os arquivos .json necessários para as requisições, a única
-alteração necessária são as atualizações dos identificadores nas requisições.
+Após inicializar os containers as aplicações ficarão disponíveis no localhost na porta 80 e deverá ser acessado via Swagger, com o final da Url swagger-ui.html. Cada aplicação da BoaEntregaGSL está disponível em um path diferente.
 
-**Importante:** A aplicação, e o container do MongoDB, não tem volume persistido, portanto, ao reinicializar os
-containers os dados serão perdidos
+**Enterprise**: `/enterprise/swagger-ui.html`
+
+**Support**:    `/support/swagger-ui.html`
+
+**Data**:       `/data/swagger-ui.html`
+
+Para acessar os monitoramentos do sistema basta acessar `/actuator`, ou `/actuator/health` ou `/actuator/prometheus`. E para acessar o monitoramento via Grafana
+basta acessar `localhost:3000`.
 
 ## Funcionalidades
 
 | Funcionalidade | Descrição |
 |----------------|-----------|
 |CRUD de usuários| Operações padrões de CRUD para usuários da aplicação.
-|CRUD de carteiras digitais|Operações padrões de CRUD para as contas digitais, possibilitando um usuário ter várias carteiras digitais.
-|Operações Bancárias|Operações bancárias básicas, sendo Saque, Depósito e Pagamento de contas operações em tempo real. Transferências, como TED, DOC e PIX, são operações assíncronas.
-|Extrato de operações|Disponibilização do extrato bancário de um usuário, geral ou por carteira digital.
-|Extrato de erros|Disponibilização do extrato de operações do usuário que tiveram erro.
+|CRUD de mercadorias| Operações padrões de CRUD para a mercadorias.
+|CRUD de rotas| Operações padrões de CRUD para a rotas.
+|CRUD de depósitos| Operações padrões de CRUD para a depósitos.
+|Integração de ThirdParty| Consulta de dados para BI.
+|Consulta de status de entrega| Consulta de status de entrega de mercadoria.
+|Aprovação de usuários| Aprovação de cadastro de usuário e atribuição de perfis.
+|Cadastro de suporte| Cadastro e consulta de ocorrências de suporte ao usuário.
+|DataMining| Módulo mock de DataMining.
 
 ---
 
 ## Desenho-da-Arquitetura
 
-A arquitetura pensada para aplicação é uma arquitetura simples, em que é exposta uma API para um cliente, podendo ser
-mobile ou web, e esse possa consumir dos serviços disponíveis. Pode ser vista na imagem a seguir:
-![](DWallet.jpeg)
+A arquitetura pensada para aplicação é uma arquitetura distribuída, em que as API ficam atrás de um NGINX, podendo ser
+consumida por mobile ou web. A arquitetura pode ser vista na imagem a seguir:
+![](boaEntrega.jpeg)
 
 ## Desenvolvimento-e-testes
 
@@ -188,20 +203,24 @@ Além disto, foram seguidos boas práticas de programação e aplicação de SOL
 ### Tratativas-de-erros
 
 Foram criadas exceções customizadas para algumas regras de negócio da aplicação, estas estão contidas no package '
-br/com/dwallet/exception'. Também foi criado um interceptador de exceções para que haja o retorno correto para a API na
-classe br/com/dwallet/exception/DWalletExceptionHandler.java.
+br/com/boaentrega/exception'. Também foi criado um interceptador de exceções para que haja o retorno correto para a API na
+classe br/com/boaentrega/exception/BoaEntregaExceptionHandler.java.
 
 ### Testes
 
 O desenvolvimento da aplicação foi feito com testes unitários por camadas, utilizando-se Mockito para fazer o mock dos
 serviços utilizados dentro de um serviço.
 
-Também foi utilizado o MongoDB em memória para possibilitar o teste de integração da camada de repositório e utilizado o
+Também foi utilizado o MongoDB e PostgreSQL em memória para possibilitar o teste de integração da camada de repositório e utilizado o
 WebMvnTest para a camada de API. Também possui um teste simples com o ArchUnit.
+
+### SDK
+
+Foi desenvolvido uma SDK para este projeto, para facilitar operações rotineiras, como CRUD, requisições REST, operações com mensageria.
 
 ## Autor
 
-| Autor| E-mail|
-|------|-------|
-|Mateus Felipe Teixeira |mateusteixeira_@hotmail.com.br |
+| Autor| E-mail| LinkedIn|
+|------|-------|---------|
+|Mateus Felipe Teixeira |mateusteixeira_@hotmail.com.br | https://www.linkedin.com/in/mateus-felipe-teixeira-7ab5747a/
 
