@@ -1,6 +1,5 @@
 package br.com.boaentrega.service;
 
-import br.com.boaentrega.domain.AbstractEntity;
 import br.com.boaentrega.domain.dto.AbstractDTO;
 import br.com.boaentrega.exception.IEntityNotFoundException;
 import br.com.boaentrega.modeltest.AbstractDTOTest;
@@ -8,7 +7,6 @@ import br.com.boaentrega.modeltest.AbstractEntityTest;
 import br.com.boaentrega.repository.IJpaRepository;
 import br.com.boaentrega.translator.AbstractTranslator;
 import br.com.boaentrega.validator.AbstractValidator;
-import lombok.Builder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

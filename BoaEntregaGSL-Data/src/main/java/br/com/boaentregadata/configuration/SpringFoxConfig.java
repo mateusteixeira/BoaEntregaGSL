@@ -39,7 +39,7 @@ public class SpringFoxConfig {
     @Bean
     public Docket api(TypeResolver typeResolver) {
         return new Docket(DocumentationType.SWAGGER_2)
-                .alternateTypeRules( AlternateTypeRules.newRule(
+                .alternateTypeRules(AlternateTypeRules.newRule(
                         typeResolver.resolve(Collection.class, Instant.class),
                         typeResolver.resolve(Collection.class, Date.class), Ordered.HIGHEST_PRECEDENCE))
                 .apiInfo(apiInfo())

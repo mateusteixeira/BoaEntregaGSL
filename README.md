@@ -2,7 +2,8 @@
 
 [![CircleCI](https://circleci.com/gh/mateusteixeira/BoaEntregaGSL/tree/main.svg?style=svg)](https://circleci.com/gh/mateusteixeira/BoaEntregaGSL/tree/main)
 
-Projeto criado como parte de Trabalho de Conclusão de Curso da Especialização em Arquitetura de Software Distribuído da PUC Minas
+Projeto criado como parte de Trabalho de Conclusão de Curso da Especialização em Arquitetura de Software Distribuído da
+PUC Minas
 
 ---
 
@@ -91,7 +92,8 @@ Para a utilização da aplicação é necessário, obrigatoriamente, o docker/do
 
 ### Inicialização-da-aplicação
 
-Na parta raiz do projeto é necessário entrar no projeto BoaEntregaGSL - SDK e executar a compilação e empacotamento, que pode ser feito através do comando:
+Na parta raiz do projeto é necessário entrar no projeto BoaEntregaGSL - SDK e executar a compilação e empacotamento, que
+pode ser feito através do comando:
 
 ```
 mvn clean install
@@ -103,7 +105,8 @@ Ou:
 mvn package
 ```
 
-Com isso será gerado a dependência para o restante do projeto. Após compilar a SDK é necessário executar os mesmos comandos acima na pasta raiz do projeto.
+Com isso será gerado a dependência para o restante do projeto. Após compilar a SDK é necessário executar os mesmos
+comandos acima na pasta raiz do projeto.
 
 Após a compilação e empacotamento com sucesso do projeto, deverá ser executado o docker/docker-compose para que seja
 construída a imagem da aplicação e iniciado os containers com a aplicação e os sistemas acessórios da aplicação
@@ -117,12 +120,14 @@ Com o comando acima, executado na pasta docker do projeto, será feito a constru
 encontra na mesma pasta, e este será responsável pela inicialização de todo o ambiente.
 
 No arquivo docker-compose.yml, encontra-se a definição das imagens que serão utilizadas e os containers que serão
-construído e inicializados. Neste caso, as configurações são da aplicação em si. Será inicializado os containers dos bancos
-de dados PostgresSQL da aplicação, o MongoDB, o NGINX, os monitoramentos e as aplicações, além de preparar o restante do ambiente.
+construído e inicializados. Neste caso, as configurações são da aplicação em si. Será inicializado os containers dos
+bancos de dados PostgresSQL da aplicação, o MongoDB, o NGINX, os monitoramentos e as aplicações, além de preparar o
+restante do ambiente.
 
 ## Utilizando-a-aplicação
 
-Após inicializar os containers as aplicações ficarão disponíveis no localhost na porta 80 e deverá ser acessado via Swagger, com o final da Url swagger-ui.html. Cada aplicação da BoaEntregaGSL está disponível em um path diferente.
+Após inicializar os containers as aplicações ficarão disponíveis no localhost na porta 80 e deverá ser acessado via
+Swagger, com o final da Url swagger-ui.html. Cada aplicação da BoaEntregaGSL está disponível em um path diferente.
 
 **Enterprise**: `/enterprise/swagger-ui.html`
 
@@ -130,8 +135,8 @@ Após inicializar os containers as aplicações ficarão disponíveis no localho
 
 **Data**:       `/data/swagger-ui.html`
 
-Para acessar os monitoramentos do sistema basta acessar `/actuator`, ou `/actuator/health` ou `/actuator/prometheus`. E para acessar o monitoramento via Grafana
-basta acessar `localhost:3000`.
+Para acessar os monitoramentos do sistema basta acessar `/actuator`, ou `/actuator/health` ou `/actuator/prometheus`. E
+para acessar o monitoramento via Grafana basta acessar `localhost:3000`.
 
 ## Funcionalidades
 
@@ -203,20 +208,21 @@ Além disto, foram seguidos boas práticas de programação e aplicação de SOL
 ### Tratativas-de-erros
 
 Foram criadas exceções customizadas para algumas regras de negócio da aplicação, estas estão contidas no package '
-br/com/boaentrega/exception'. Também foi criado um interceptador de exceções para que haja o retorno correto para a API na
-classe br/com/boaentrega/exception/BoaEntregaExceptionHandler.java.
+br/com/boaentrega/exception'. Também foi criado um interceptador de exceções para que haja o retorno correto para a API
+na classe br/com/boaentrega/exception/BoaEntregaExceptionHandler.java.
 
 ### Testes
 
 O desenvolvimento da aplicação foi feito com testes unitários por camadas, utilizando-se Mockito para fazer o mock dos
 serviços utilizados dentro de um serviço.
 
-Também foi utilizado o MongoDB e PostgreSQL em memória para possibilitar o teste de integração da camada de repositório e utilizado o
-WebMvnTest para a camada de API. Também possui um teste simples com o ArchUnit.
+Também foi utilizado o MongoDB e PostgreSQL em memória para possibilitar o teste de integração da camada de repositório
+e utilizado o WebMvnTest para a camada de API. Também possui um teste simples com o ArchUnit.
 
 ### SDK
 
-Foi desenvolvido uma SDK para este projeto, para facilitar operações rotineiras, como CRUD, requisições REST, operações com mensageria.
+Foi desenvolvido uma SDK para este projeto, para facilitar operações rotineiras, como CRUD, requisições REST, operações
+com mensageria.
 
 ## Autor
 

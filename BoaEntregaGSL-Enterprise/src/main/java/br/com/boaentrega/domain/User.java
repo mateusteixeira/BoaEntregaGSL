@@ -11,7 +11,7 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name="\"user\"")
+@Table(name = "\"user\"")
 @SequenceGenerator(name = AbstractEntity.SEQ_NAME, sequenceName = "USER_SEQ", initialValue = 0, allocationSize = 1)
 public class User extends AbstractEntity<Long> {
 
