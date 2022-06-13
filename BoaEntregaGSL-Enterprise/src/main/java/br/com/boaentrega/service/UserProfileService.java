@@ -62,7 +62,6 @@ public class UserProfileService {
                 .stream()
                 .filter(userToApprove -> !userToApprove.getIdUser().equals(idApprovalUser))
                 .map(userToApprove -> userService.getUserById(userToApprove.getIdUser()))
-                .filter(userDTO -> !userDTO.getProfile().equals(Profile.ADMINISTRATOR.name()))
                 .collect(Collectors.toList());
     }
 }
